@@ -54,6 +54,33 @@
         "regex": "",
         "skipUrlSync": false,
         "sort": 0
+      },
+      {
+        "name": "username",
+        "type": "query",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "label": "用户名",
+        "query": {
+          "query": "label_values(net_user_rx_packets, username)",
+          "refId": "StandardVariableQuery"
+        },
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "options": [],
+        "hide": 0,
+        "includeAll": true,
+        "multi": false,
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "allValue": ".*"
       }
     ]
   },
