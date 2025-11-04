@@ -617,7 +617,7 @@
             "uid": "prometheus"
           },
           "expr": "rate(net_interface_rx_packets{iface=\"wg0\"}[1m])",
-          "legendFormat": "RX Packets",
+          "legendFormat": "RX Packets (Total)",
           "refId": "A"
         },
         {
@@ -626,8 +626,28 @@
             "uid": "prometheus"
           },
           "expr": "rate(net_interface_tx_packets{iface=\"wg0\"}[1m])",
-          "legendFormat": "TX Packets",
+          "legendFormat": "TX Packets (Total)",
           "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "rate(net_user_rx_packets{username=~\"$username\"}[1m])",
+          "legendFormat": "RX - {{username}}",
+          "refId": "C",
+          "hide": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "rate(net_user_tx_packets{username=~\"$username\"}[1m])",
+          "legendFormat": "TX - {{username}}",
+          "refId": "D",
+          "hide": false
         }
       ],
       "title": "Packet Rate",
@@ -846,7 +866,34 @@
     "networking"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "name": "username",
+        "type": "query",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "label": "用户名",
+        "query": {
+          "query": "label_values(net_user_rx_packets, username)",
+          "refId": "StandardVariableQuery"
+        },
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "options": [],
+        "hide": 0,
+        "includeAll": true,
+        "multi": false,
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1
+      }
+    ]
   },
   "time": {
     "from": "now-1h",

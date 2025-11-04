@@ -107,6 +107,13 @@
     "y": 22
   },
   "id": 8,
+  "options": {
+    "legend": {
+      "displayMode": "list",
+      "placement": "right",
+      "showLegend": true
+    }
+  },
   "targets": [
     {
       "datasource": {

@@ -57,7 +57,7 @@
   "options": {
     "legend": {
       "displayMode": "list",
-      "placement": "bottom",
+      "placement": "right",
       "showLegend": true
     },
     "tooltip": {

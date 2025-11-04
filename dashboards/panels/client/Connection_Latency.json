@@ -67,7 +67,7 @@
         "last"
       ],
       "displayMode": "table",
-      "placement": "bottom",
+      "placement": "right",
       "showLegend": true
     },
     "tooltip": {
