@@ -71,7 +71,7 @@
         "type": "prometheus",
         "uid": "ef32in03bdb0gb"
       },
-      "expr": "rate(tunnel_server_database_query_duration_seconds_sum[5m]) / rate(tunnel_server_database_query_duration_seconds_count[5m])",
+      "expr": "(rate(tunnel_server_database_query_duration_seconds_sum[5m]) / rate(tunnel_server_database_query_duration_seconds_count[5m])) or vector(0)",
       "legendFormat": "{{operation}} - {{table}}",
       "refId": "A"
     }

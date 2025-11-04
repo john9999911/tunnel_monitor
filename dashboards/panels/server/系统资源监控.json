@@ -113,7 +113,7 @@
         "type": "prometheus",
         "uid": "ef32in03bdb0gb"
       },
-      "expr": "tunnel_server_memory_usage_bytes / 1024 / 1024",
+      "expr": "(tunnel_server_memory_usage_bytes) / 1024 / 1024",
       "legendFormat": "内存使用量 (MB)"
     },
     {

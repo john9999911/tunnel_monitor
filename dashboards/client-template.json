@@ -66,10 +66,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
         "x": 0,
-        "y": 0
+        "y": 0,
+        "w": 4,
+        "h": 4
       },
       "id": 1,
       "options": {
@@ -125,10 +125,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
         "x": 4,
-        "y": 0
+        "y": 0,
+        "w": 4,
+        "h": 4
       },
       "id": 2,
       "options": {
@@ -184,10 +184,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
         "x": 8,
-        "y": 0
+        "y": 0,
+        "w": 4,
+        "h": 4
       },
       "id": 3,
       "options": {
@@ -248,10 +248,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
         "x": 12,
-        "y": 0
+        "y": 0,
+        "w": 4,
+        "h": 4
       },
       "id": 4,
       "options": {
@@ -307,10 +307,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
         "x": 16,
-        "y": 0
+        "y": 0,
+        "w": 4,
+        "h": 4
       },
       "id": 5,
       "options": {
@@ -366,10 +366,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
         "x": 20,
-        "y": 0
+        "y": 0,
+        "w": 4,
+        "h": 4
       },
       "id": 6,
       "options": {
@@ -486,10 +486,10 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
         "x": 0,
-        "y": 4
+        "y": 4,
+        "w": 12,
+        "h": 8
       },
       "id": 7,
       "options": {
@@ -587,10 +587,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
         "x": 12,
-        "y": 4
+        "y": 4,
+        "w": 12,
+        "h": 8
       },
       "id": 8,
       "options": {
@@ -688,10 +688,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
         "x": 0,
-        "y": 12
+        "y": 12,
+        "w": 12,
+        "h": 8
       },
       "id": 9,
       "options": {
@@ -777,114 +777,6 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 12
-      },
-      "id": 10,
-      "options": {
-        "legend": {
-          "calcs": [
-            "sum"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "rate(config_sync_errors_total[5m])",
-          "legendFormat": "Config Sync - {{operation}} ({{error_type}})",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "rate(dns_errors_total[5m])",
-          "legendFormat": "DNS - {{operation}}",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "rate(tunnel_errors_total[5m])",
-          "legendFormat": "Tunnel - {{operation}} ({{error_type}})",
-          "refId": "C"
-        }
-      ],
-      "title": "Error Rates by Type",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "none",
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
               "mode": "none"
             },
             "thresholdsStyle": {
@@ -906,10 +798,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "x": 12,
+        "y": 12,
         "w": 12,
-        "x": 0,
-        "y": 20
+        "h": 8
       },
       "id": 11,
       "options": {
@@ -942,578 +834,6 @@
       ],
       "title": "TC Active Classes",
       "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "none",
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 20
-      },
-      "id": 12,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "last"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "tc_queue_length",
-          "legendFormat": "{{iface}} - {{direction}} - mark:{{markid}}",
-          "refId": "A"
-        }
-      ],
-      "title": "TC Queue Length",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "none",
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 1
-              }
-            ]
-          },
-          "unit": "pps"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 28
-      },
-      "id": 13,
-      "options": {
-        "legend": {
-          "calcs": [
-            "sum"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "rate(tc_packets_dropped_total[5m])",
-          "legendFormat": "{{iface}} - {{direction}} - mark:{{markid}}",
-          "refId": "A"
-        }
-      ],
-      "title": "TC Packets Dropped Rate",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "none",
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "bps"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 28
-      },
-      "id": 14,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "last"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "tc_bandwidth_limit_bps",
-          "legendFormat": "{{iface}} - {{direction}} - mark:{{markid}}",
-          "refId": "A"
-        }
-      ],
-      "title": "TC Bandwidth Limits",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "none",
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 36
-      },
-      "id": 15,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "last"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "iptables_rules_total",
-          "legendFormat": "{{chain}}",
-          "refId": "A"
-        }
-      ],
-      "title": "IPTables Rules Count",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "none",
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 36
-      },
-      "id": 16,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "last"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "histogram_quantile(0.50, rate(tc_sync_duration_seconds_bucket[5m]))",
-          "legendFormat": "p50",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "histogram_quantile(0.95, rate(tc_sync_duration_seconds_bucket[5m]))",
-          "legendFormat": "p95",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "histogram_quantile(0.99, rate(tc_sync_duration_seconds_bucket[5m]))",
-          "legendFormat": "p99",
-          "refId": "C"
-        }
-      ],
-      "title": "TC Sync Duration",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "none",
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 44
-      },
-      "id": 17,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "last"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "tc_mark_pool_usage",
-          "legendFormat": "{{direction}} - {{status}}",
-          "refId": "A"
-        }
-      ],
-      "title": "TC Mark Pool Usage",
-      "type": "timeseries"
     }
   ],
   "refresh": "10s",
@@ -1539,6 +859,3 @@
   "version": 1,
   "weekStart": ""
 }
-
-
-
