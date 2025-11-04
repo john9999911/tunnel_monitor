@@ -166,3 +166,33 @@ func CreateDatabaseDashboard() error {
 	fmt.Println("✅ 数据库监控面板创建成功")
 	return nil
 }
+
+// CreateAllDashboards 创建所有监控面板
+func CreateAllDashboards() error {
+	fmt.Println("🚀 开始创建所有监控面板...")
+	fmt.Println()
+
+	// 创建数据库面板
+	if err := CreateDatabaseDashboard(); err != nil {
+		fmt.Printf("⚠️  数据库面板创建失败: %v\n", err)
+	} else {
+		fmt.Println()
+	}
+
+	// 创建客户端面板
+	if err := CreateUnifiedDashboard(); err != nil {
+		fmt.Printf("⚠️  客户端面板创建失败: %v\n", err)
+	} else {
+		fmt.Println()
+	}
+
+	// 创建服务端面板
+	if err := CreateServerDashboard(); err != nil {
+		fmt.Printf("⚠️  服务端面板创建失败: %v\n", err)
+	} else {
+		fmt.Println()
+	}
+
+	fmt.Println("✅ 所有监控面板创建完成！")
+	return nil
+}

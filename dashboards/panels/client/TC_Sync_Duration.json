@@ -82,27 +82,9 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "expr": "histogram_quantile(0.50, rate(tc_sync_duration_seconds_bucket[5m]))",
-      "legendFormat": "p50",
+      "expr": "histogram_quantile($Percentile / 100.0, rate(tc_sync_duration_seconds_bucket[5m]))",
+      "legendFormat": "p$Percentile",
       "refId": "A"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "expr": "histogram_quantile(0.95, rate(tc_sync_duration_seconds_bucket[5m]))",
-      "legendFormat": "p95",
-      "refId": "B"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "expr": "histogram_quantile(0.99, rate(tc_sync_duration_seconds_bucket[5m]))",
-      "legendFormat": "p99",
-      "refId": "C"
     }
   ],
   "title": "TC Sync Duration",

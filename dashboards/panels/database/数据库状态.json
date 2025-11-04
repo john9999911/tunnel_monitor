@@ -1,26 +1,40 @@
 {
+  "datasource": {
+    "type": "prometheus",
+    "uid": "ef32in03bdb0gb"
+  },
   "fieldConfig": {
     "defaults": {
       "color": {
         "mode": "thresholds"
       },
-      "decimals": 0,
-      "mappings": [],
-      "min": 0,
+      "mappings": [
+        {
+          "options": {
+            "0": {
+              "color": "red",
+              "index": 0,
+              "text": "Down"
+            },
+            "1": {
+              "color": "green",
+              "index": 1,
+              "text": "Up"
+            }
+          },
+          "type": "value"
+        }
+      ],
       "thresholds": {
         "mode": "absolute",
         "steps": [
           {
-            "color": "green",
+            "color": "red",
             "value": null
           },
           {
-            "color": "yellow",
-            "value": 10
-          },
-          {
-            "color": "red",
-            "value": 20
+            "color": "green",
+            "value": 1
           }
         ]
       },
@@ -31,12 +45,12 @@
   "gridPos": {
     "h": 6,
     "w": 4,
-    "x": 4,
+    "x": 0,
     "y": 0
   },
-  "id": 1,
+  "id": 0,
   "options": {
-    "colorMode": "background",
+    "colorMode": "value",
     "graphMode": "none",
     "justifyMode": "center",
     "orientation": "auto",
@@ -47,7 +61,7 @@
       "fields": "",
       "values": false
     },
-    "textMode": "auto"
+    "textMode": "value_and_name"
   },
   "pluginVersion": "10.0.0",
   "targets": [
@@ -56,10 +70,10 @@
         "type": "prometheus",
         "uid": "ef32in03bdb0gb"
       },
-      "expr": "tunnel_server_database_connections",
+      "expr": "up{job=\"tunnel-server\"}",
       "refId": "A"
     }
   ],
-  "title": "数据库连接数",
+  "title": "数据库状态",
   "type": "stat"
 }

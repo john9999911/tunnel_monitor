@@ -82,27 +82,9 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "expr": "histogram_quantile(0.50, sum(rate(connection_latency_seconds_bucket[5m])) by (le, target))",
-      "legendFormat": "p50 - {{target}}",
+      "expr": "histogram_quantile($Percentile / 100.0, sum(rate(connection_latency_seconds_bucket[5m])) by (le, target))",
+      "legendFormat": "{{target}} (p$Percentile)",
       "refId": "A"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "expr": "histogram_quantile(0.95, sum(rate(connection_latency_seconds_bucket[5m])) by (le, target))",
-      "legendFormat": "p95 - {{target}}",
-      "refId": "B"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "expr": "histogram_quantile(0.99, sum(rate(connection_latency_seconds_bucket[5m])) by (le, target))",
-      "legendFormat": "p99 - {{target}}",
-      "refId": "C"
     }
   ],
   "title": "Connection Latency",

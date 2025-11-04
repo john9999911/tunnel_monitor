@@ -39,6 +39,15 @@ var createDatabaseCmd = &cobra.Command{
 	},
 }
 
+var createAllCmd = &cobra.Command{
+	Use:   "create-all",
+	Short: "创建所有监控面板",
+	Long:  "一次性创建客户端、服务端和数据库监控面板",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return dashboard.CreateAllDashboards()
+	},
+}
+
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "列出所有面板",
@@ -52,6 +61,7 @@ func init() {
 	dashboardCmd.AddCommand(createUnifiedCmd)
 	dashboardCmd.AddCommand(createServerCmd)
 	dashboardCmd.AddCommand(createDatabaseCmd)
+	dashboardCmd.AddCommand(createAllCmd)
 	dashboardCmd.AddCommand(listCmd)
 	rootCmd.AddCommand(dashboardCmd)
 }

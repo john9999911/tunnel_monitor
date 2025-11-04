@@ -31,7 +31,31 @@
     "networking"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "name": "Percentile",
+        "type": "custom",
+        "query": "50,75,90,95,99",
+        "current": {
+          "text": "95",
+          "value": "95"
+        },
+        "options": [
+          {"text": "50", "value": "50"},
+          {"text": "75", "value": "75"},
+          {"text": "90", "value": "90"},
+          {"text": "95", "value": "95"},
+          {"text": "99", "value": "99"}
+        ],
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0
+      }
+    ]
   },
   "time": {
     "from": "now-1h",
