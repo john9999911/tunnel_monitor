@@ -23,10 +23,19 @@ var createUnifiedCmd = &cobra.Command{
 
 var createServerCmd = &cobra.Command{
 	Use:   "create-server",
-	Short: "创建服务端监控面板",
-	Long:  "创建服务端监控面板",
+	Short: "创建统一服务端监控面板",
+	Long:  "创建统一的服务端监控面板，支持多服务端部署（使用变量选择实例）",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return dashboard.CreateServerDashboard()
+	},
+}
+
+var createDatabaseCmd = &cobra.Command{
+	Use:   "create-database",
+	Short: "创建数据库监控面板",
+	Long:  "创建数据库监控面板",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return dashboard.CreateDatabaseDashboard()
 	},
 }
 
@@ -42,6 +51,7 @@ var listCmd = &cobra.Command{
 func init() {
 	dashboardCmd.AddCommand(createUnifiedCmd)
 	dashboardCmd.AddCommand(createServerCmd)
+	dashboardCmd.AddCommand(createDatabaseCmd)
 	dashboardCmd.AddCommand(listCmd)
 	rootCmd.AddCommand(dashboardCmd)
 }

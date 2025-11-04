@@ -67,11 +67,14 @@ go build -o tunnel-monitor
 ### 创建监控面板
 
 ```bash
-# 创建统一客户端监控面板
+# 创建统一客户端监控面板（支持多客户端，使用变量选择）
 ./tunnel-monitor dashboard create-unified
 
-# 创建服务端监控面板
+# 创建统一服务端监控面板（支持多服务端部署，使用变量选择）
 ./tunnel-monitor dashboard create-server
+
+# 创建数据库监控面板
+./tunnel-monitor dashboard create-database
 
 # 列出所有面板
 ./tunnel-monitor dashboard list
@@ -93,8 +96,9 @@ vim config.yaml
 sudo ./tunnel-monitor start
 
 # 5. 创建监控面板
-./tunnel-monitor dashboard create-server
-./tunnel-monitor dashboard create-unified
+./tunnel-monitor dashboard create-server      # 统一服务端监控面板
+./tunnel-monitor dashboard create-unified     # 统一客户端监控面板
+./tunnel-monitor dashboard create-database    # 数据库监控面板
 ```
 
 ## 项目结构
@@ -120,7 +124,8 @@ tunnel_monitor/
 │       └── prometheus.yml # Prometheus 配置文件
 ├── dashboards/
 │   ├── server-template.json    # 服务端监控面板模板
-│   └── client-template.json    # 客户端监控面板模板
+│   ├── client-template.json    # 客户端监控面板模板
+│   └── database-template.json  # 数据库监控面板模板
 ├── config.yaml            # 配置文件
 ├── config.yaml.example    # 配置文件示例
 ├── go.mod
@@ -162,13 +167,29 @@ clients:
 
 - `server-template.json`: 服务端监控面板模板
 - `client-template.json`: 客户端监控面板模板
+- `database-template.json`: 数据库监控面板模板
 
 这些模板文件已经包含在项目中，可以直接使用。
 
-统一监控面板会自动：
-- 从 Prometheus 发现所有客户端实例
+### 统一监控面板特性
+
+**统一客户端监控面板**：
+- 从 Prometheus 自动发现所有客户端实例
 - 添加 instance 变量供选择
 - 为所有查询添加 `instance="$instance"` 过滤
+- 支持多客户端部署场景
+
+**统一服务端监控面板**：
+- 从 Prometheus 自动发现所有服务端实例
+- 添加 instance 变量供选择
+- 为所有查询添加 `instance="$instance"` 过滤
+- 支持多服务端部署场景（参考 multi-server-deployment.md）
+
+**数据库监控面板**：
+- 监控数据库连接数
+- 监控数据库查询耗时和QPS
+- 监控数据库错误统计
+- 简单实用的数据库性能监控
 
 ## 许可证
 

@@ -33,10 +33,12 @@ type Config struct {
 	Clients []ClientConfig `yaml:"clients"`
 
 	Dashboards struct {
-		ServerTemplate string `yaml:"server_template"`
-		ClientTemplate string `yaml:"client_template"`
-		UnifiedUID     string `yaml:"unified_uid"`
-		ServerUID      string `yaml:"server_uid"`
+		ServerTemplate   string `yaml:"server_template"`
+		ClientTemplate   string `yaml:"client_template"`
+		DatabaseTemplate string `yaml:"database_template"`
+		UnifiedUID       string `yaml:"unified_uid"`
+		ServerUID        string `yaml:"server_uid"`
+		DatabaseUID      string `yaml:"database_uid"`
 	} `yaml:"dashboards"`
 }
 
@@ -89,8 +91,10 @@ func setDefaults() {
 
 	Global.Dashboards.ServerTemplate = "./dashboards/server-template.json"
 	Global.Dashboards.ClientTemplate = "./dashboards/client-template.json"
+	Global.Dashboards.DatabaseTemplate = "./dashboards/database-template.json"
 	Global.Dashboards.UnifiedUID = "pop-clients-unified"
 	Global.Dashboards.ServerUID = "tunnel-server"
+	Global.Dashboards.DatabaseUID = "tunnel-database"
 }
 
 func Save() error {

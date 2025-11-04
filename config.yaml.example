@@ -28,6 +28,8 @@ clients: []
 dashboards:
   server_template: "./dashboards/server-template.json"
   client_template: "./dashboards/client-template.json"
+  database_template: "./dashboards/database-template.json"
   unified_uid: "pop-clients-unified"
   server_uid: "tunnel-server"
+  database_uid: "tunnel-database"
 
