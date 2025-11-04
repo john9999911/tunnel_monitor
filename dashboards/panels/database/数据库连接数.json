@@ -1,0 +1,65 @@
+{
+  "fieldConfig": {
+    "defaults": {
+      "color": {
+        "mode": "thresholds"
+      },
+      "decimals": 0,
+      "mappings": [],
+      "min": 0,
+      "thresholds": {
+        "mode": "absolute",
+        "steps": [
+          {
+            "color": "green",
+            "value": null
+          },
+          {
+            "color": "yellow",
+            "value": 10
+          },
+          {
+            "color": "red",
+            "value": 20
+          }
+        ]
+      },
+      "unit": "short"
+    },
+    "overrides": []
+  },
+  "gridPos": {
+    "h": 6,
+    "w": 6,
+    "x": 0,
+    "y": 0
+  },
+  "id": 1,
+  "options": {
+    "colorMode": "background",
+    "graphMode": "none",
+    "justifyMode": "center",
+    "orientation": "auto",
+    "reduceOptions": {
+      "calcs": [
+        "lastNotNull"
+      ],
+      "fields": "",
+      "values": false
+    },
+    "textMode": "auto"
+  },
+  "pluginVersion": "10.0.0",
+  "targets": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ef32in03bdb0gb"
+      },
+      "expr": "tunnel_server_database_connections",
+      "refId": "A"
+    }
+  ],
+  "title": "数据库连接数",
+  "type": "stat"
+}

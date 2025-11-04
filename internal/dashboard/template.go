@@ -37,13 +37,15 @@ func LoadClientTemplate() (map[string]interface{}, error) {
 	}
 
 	// 尝试使用拆分模板
-	baseTemplate := templateFile
+	baseTemplate := "./dashboards/client-base.json"
 	panelsDir := "./dashboards/panels/client"
 	
-	// 如果存在panels目录，使用模板管理器加载
-	if _, err := os.Stat(panelsDir); err == nil {
-		tm := NewTemplateManager("")
-		return tm.LoadTemplateWithPanels(baseTemplate, panelsDir)
+	// 如果存在拆分后的基础模板和panels目录，使用模板管理器加载
+	if _, err := os.Stat(baseTemplate); err == nil {
+		if _, err := os.Stat(panelsDir); err == nil {
+			tm := NewTemplateManager("")
+			return tm.LoadTemplateWithPanels(baseTemplate, panelsDir)
+		}
 	}
 
 	// 否则使用完整模板
@@ -60,13 +62,15 @@ func LoadServerTemplate() (map[string]interface{}, error) {
 	}
 
 	// 尝试使用拆分模板
-	baseTemplate := templateFile
+	baseTemplate := "./dashboards/server-base.json"
 	panelsDir := "./dashboards/panels/server"
 	
-	// 如果存在panels目录，使用模板管理器加载
-	if _, err := os.Stat(panelsDir); err == nil {
-		tm := NewTemplateManager("")
-		return tm.LoadTemplateWithPanels(baseTemplate, panelsDir)
+	// 如果存在拆分后的基础模板和panels目录，使用模板管理器加载
+	if _, err := os.Stat(baseTemplate); err == nil {
+		if _, err := os.Stat(panelsDir); err == nil {
+			tm := NewTemplateManager("")
+			return tm.LoadTemplateWithPanels(baseTemplate, panelsDir)
+		}
 	}
 
 	// 否则使用完整模板
@@ -83,13 +87,15 @@ func LoadDatabaseTemplate() (map[string]interface{}, error) {
 	}
 
 	// 尝试使用拆分模板
-	baseTemplate := templateFile
+	baseTemplate := "./dashboards/database-base.json"
 	panelsDir := "./dashboards/panels/database"
 	
-	// 如果存在panels目录，使用模板管理器加载
-	if _, err := os.Stat(panelsDir); err == nil {
-		tm := NewTemplateManager("")
-		return tm.LoadTemplateWithPanels(baseTemplate, panelsDir)
+	// 如果存在拆分后的基础模板和panels目录，使用模板管理器加载
+	if _, err := os.Stat(baseTemplate); err == nil {
+		if _, err := os.Stat(panelsDir); err == nil {
+			tm := NewTemplateManager("")
+			return tm.LoadTemplateWithPanels(baseTemplate, panelsDir)
+		}
 	}
 
 	// 否则使用完整模板

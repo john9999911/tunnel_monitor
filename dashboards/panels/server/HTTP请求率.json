@@ -1,0 +1,97 @@
+{
+  "fieldConfig": {
+    "defaults": {
+      "color": {
+        "mode": "palette-classic"
+      },
+      "custom": {
+        "axisLabel": "",
+        "axisPlacement": "auto",
+        "drawStyle": "line",
+        "fillOpacity": 10,
+        "gradientMode": "none",
+        "hideFrom": {
+          "legend": false,
+          "tooltip": false,
+          "vis": false
+        },
+        "insertNulls": false,
+        "lineInterpolation": "linear",
+        "lineWidth": 2,
+        "pointSize": 5,
+        "scaleDistribution": {
+          "type": "linear"
+        },
+        "showPoints": "never",
+        "spanNulls": false,
+        "stacking": {
+          "group": "A",
+          "mode": "none"
+        },
+        "thresholdsStyle": {
+          "mode": "off"
+        }
+      },
+      "decimals": 2,
+      "mappings": [],
+      "thresholds": {
+        "mode": "absolute",
+        "steps": [
+          {
+            "color": "green",
+            "value": null
+          },
+          {
+            "color": "red",
+            "value": 80
+          }
+        ]
+      },
+      "unit": "reqps"
+    },
+    "overrides": []
+  },
+  "gridPos": {
+    "h": 8,
+    "w": 24,
+    "x": 0,
+    "y": 0
+  },
+  "id": 1,
+  "legend": {
+    "calcs": [
+      "lastNotNull"
+    ],
+    "displayMode": "list",
+    "placement": "right",
+    "showLegend": true,
+    "values": [
+      "last"
+    ]
+  },
+  "options": {
+    "legend": {
+      "calcs": [
+        "lastNotNull"
+      ],
+      "displayMode": "list",
+      "placement": "right",
+      "showLegend": true,
+      "values": [
+        "last"
+      ]
+    }
+  },
+  "targets": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ef32in03bdb0gb"
+      },
+      "expr": "rate(tunnel_server_http_requests_total[5m])",
+      "legendFormat": "{{method}} {{endpoint}}"
+    }
+  ],
+  "title": "HTTP请求率",
+  "type": "timeseries"
+}

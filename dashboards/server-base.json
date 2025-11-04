@@ -1,0 +1,55 @@
+{
+  "refresh": "5s",
+  "tags": [
+    "tunnel-server",
+    "prometheus"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "95",
+          "value": "95"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "Percentile",
+        "options": [
+          {
+            "text": "50",
+            "value": "50"
+          },
+          {
+            "text": "75",
+            "value": "75"
+          },
+          {
+            "text": "90",
+            "value": "90"
+          },
+          {
+            "text": "95",
+            "value": "95"
+          },
+          {
+            "text": "99",
+            "value": "99"
+          }
+        ],
+        "query": "50,75,90,95,99",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timezone": "browser",
+  "title": "Tunnel Server 监控面板"
+}
