@@ -311,3 +311,68 @@ func findMetricNameEnd(expr string, start int) int {
 	}
 	return start + 1
 }
+
+// AddUsernameControlToPacketRatePanel 为Packet Rate面板添加username变量控制逻辑
+// 当选择特定用户时，只显示该用户的数据；当选择"All"时，显示总体统计
+// 实现方式：修改查询表达式，使用or操作符实现条件显示
+// 当username="All"（即.*）时，总体查询显示，用户查询返回空
+// 当选择特定用户时，总体查询返回空，用户查询正常显示
+func AddUsernameControlToPacketRatePanel(dashboard map[string]interface{}) error {
+	panels, ok := dashboard["panels"].([]interface{})
+	if !ok {
+		return nil
+	}
+
+	for _, p := range panels {
+		panel, ok := p.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		// 只处理Packet Rate面板
+		title, ok := panel["title"].(string)
+		if !ok || title != "Packet Rate" {
+			continue
+		}
+
+		targets, ok := panel["targets"].([]interface{})
+		if !ok {
+			continue
+		}
+
+		// 修改查询表达式，使其根据username变量动态显示
+		for _, t := range targets {
+			target, ok := t.(map[string]interface{})
+			if !ok {
+				continue
+			}
+
+			refId, ok := target["refId"].(string)
+			if !ok {
+				continue
+			}
+
+			// refId A和B是总体统计（RX/TX Packets Total）
+			// 当username="All"（即.*）时显示，选择特定用户时隐藏
+			// 实现方式：使用count检查用户查询匹配的用户数
+			// 当username="All"（.*）时，count等于总用户数，显示总体
+			// 当选择特定用户时，count=1（或小于总用户数），隐藏总体
+			// 技巧：当count等于总用户数时（即选择了All），显示总体；否则返回0
+
+			if refId == "A" {
+				// RX Packets Total：当用户查询匹配的用户数等于总用户数时显示，否则返回0
+				// 使用count检查：count(用户查询) == count(所有用户) ? 显示总体 : 返回0
+				// 总用户数通过count(count(net_user_rx_packets) by (username))获取
+				newExpr := "(count(sum(rate(net_user_rx_packets{username=~\"$username\"}[1m])) by (username)) == count(count(net_user_rx_packets) by (username))) * rate(net_interface_rx_packets{iface=\"wg0\"}[1m])"
+				target["expr"] = newExpr
+			} else if refId == "B" {
+				// TX Packets Total：当用户查询匹配的用户数等于总用户数时显示，否则返回0
+				newExpr := "(count(sum(rate(net_user_tx_packets{username=~\"$username\"}[1m])) by (username)) == count(count(net_user_tx_packets) by (username))) * rate(net_interface_tx_packets{iface=\"wg0\"}[1m])"
+				target["expr"] = newExpr
+			}
+			// refId C和D（用户查询）保持不变，正常显示
+		}
+	}
+
+	return nil
+}

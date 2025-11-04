@@ -618,7 +618,8 @@
           },
           "expr": "rate(net_interface_rx_packets{iface=\"wg0\"}[1m])",
           "legendFormat": "RX Packets (Total)",
-          "refId": "A"
+          "refId": "A",
+          "hide": false
         },
         {
           "datasource": {
@@ -627,14 +628,15 @@
           },
           "expr": "rate(net_interface_tx_packets{iface=\"wg0\"}[1m])",
           "legendFormat": "TX Packets (Total)",
-          "refId": "B"
+          "refId": "B",
+          "hide": false
         },
         {
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "rate(net_user_rx_packets{username=~\"$username\"}[1m])",
+          "expr": "sum(rate(net_user_rx_packets{username=~\"$username\"}[1m])) by (username)",
           "legendFormat": "RX - {{username}}",
           "refId": "C",
           "hide": false
@@ -644,7 +646,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "rate(net_user_tx_packets{username=~\"$username\"}[1m])",
+          "expr": "sum(rate(net_user_tx_packets{username=~\"$username\"}[1m])) by (username)",
           "legendFormat": "TX - {{username}}",
           "refId": "D",
           "hide": false
@@ -891,7 +893,8 @@
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 1
+        "sort": 1,
+        "allValue": ".*"
       }
     ]
   },

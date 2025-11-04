@@ -44,6 +44,11 @@ func CreateUnifiedDashboard() error {
 		return fmt.Errorf("添加实例过滤失败: %w", err)
 	}
 
+	// 为Packet Rate面板添加username变量控制逻辑
+	if err := AddUsernameControlToPacketRatePanel(dashboard); err != nil {
+		return fmt.Errorf("添加用户名控制失败: %w", err)
+	}
+
 	// 修复数据源引用
 	FixDatasource(dashboard)
 
