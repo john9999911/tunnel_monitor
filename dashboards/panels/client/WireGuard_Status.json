@@ -69,10 +69,10 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "expr": "wg_interface_up{iface=\"wg0\"}",
+      "expr": "up{job=\"tunnel-client-pop\"}",
       "refId": "A"
     }
   ],
-  "title": "WireGuard Status",
+      "title": "POP机器状态",
   "type": "stat"
 }

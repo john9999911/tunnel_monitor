@@ -10,13 +10,11 @@ import (
 	"tunnel-monitor/internal/config"
 )
 
-// GetClientInstances 从 Prometheus 查询客户端实例
+// GetClientInstances 从 Prometheus targets API 获取所有客户端实例（包括 up 和 down）
 func GetClientInstances() ([]string, error) {
+	// 从 Prometheus targets API 获取所有配置的 target，包括 down 的
 	promURL := config.Global.Prometheus.URL
-	query := `wg_interface_up{job=~"tunnel-client.*"}`
-
-	encodedQuery := strings.ReplaceAll(query, " ", "%20")
-	url := fmt.Sprintf("%s/api/v1/query?query=%s", promURL, encodedQuery)
+	url := fmt.Sprintf("%s/api/v1/targets", promURL)
 
 	resp, err := http.Get(url)
 	if err != nil {
@@ -40,14 +38,20 @@ func GetClientInstances() ([]string, error) {
 	}
 
 	dataObj := result["data"].(map[string]interface{})
-	results := dataObj["result"].([]interface{})
+	activeTargets := dataObj["activeTargets"].([]interface{})
 
 	instances := make(map[string]bool)
-	for _, r := range results {
-		metric := r.(map[string]interface{})["metric"].(map[string]interface{})
-		instance := getString(metric, "instance")
-		if instance != "" && strings.Contains(instance, ":") {
-			instances[instance] = true
+	for _, target := range activeTargets {
+		targetMap := target.(map[string]interface{})
+		labels := targetMap["labels"].(map[string]interface{})
+		job := getString(labels, "job")
+
+		// 获取所有 tunnel-client-pop job 的目标，不管健康状态如何（up/down/unknown）
+		if job == "tunnel-client-pop" {
+			instance := getString(labels, "instance")
+			if instance != "" && strings.Contains(instance, ":") {
+				instances[instance] = true
+			}
 		}
 	}
 
