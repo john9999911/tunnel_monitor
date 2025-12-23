@@ -70,7 +70,7 @@
             "editorMode": "code",
             "expr": "pop_dns_service_status{exported_instance=~\"$pop_machines\"}",
             "instant": false,
-            "legendFormat": "{{exported_instance}}",
+            "legendFormat": "{{instance_alias}}",
             "range": true,
             "refId": "A"
         }

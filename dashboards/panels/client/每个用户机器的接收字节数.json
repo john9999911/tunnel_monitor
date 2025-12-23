@@ -58,7 +58,7 @@
             "editorMode": "code",
             "expr": "pop_wireguard_rx_bytes{user_machine_ip=~\"$user_machines\"}",
             "instant": false,
-            "legendFormat": "{{exported_instance}}-{{user_machine_ip}}",
+            "legendFormat": "{{instance_alias}} ~ {{alias}}",
             "range": true,
             "refId": "A"
         }

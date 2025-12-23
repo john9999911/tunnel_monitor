@@ -89,7 +89,7 @@
             "editorMode": "code",
             "expr": "pop_wireguard_latency{exported_instance=~\"$pop_machines\"}",
             "instant": false,
-            "legendFormat": "{{exported_instance}}-{{peer_ip}}",
+            "legendFormat": "{{instance_alias}} ~ {{alias}}",
             "range": true,
             "refId": "A"
         }

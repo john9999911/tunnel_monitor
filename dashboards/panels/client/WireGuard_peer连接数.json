@@ -58,7 +58,7 @@
             "editorMode": "code",
             "expr": "pop_wireguard_peer_count{exported_instance=~\"$pop_machines\"}",
             "instant": false,
-            "legendFormat": "{{exported_instance}}",
+            "legendFormat": "{{instance_alias}}",
             "range": true,
             "refId": "A"
         }

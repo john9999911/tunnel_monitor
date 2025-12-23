@@ -92,7 +92,7 @@
             "editorMode": "code",
             "expr": "pop_traffic_tx_rate{user_machine_ip=~\"$user_machines\"} / 1000",
             "instant": false,
-            "legendFormat": "{{exported_instance}}-{{user_machine_ip}}",
+            "legendFormat": "{{instance_alias}} ~ {{alias}}",
             "range": true,
             "refId": "A"
         }

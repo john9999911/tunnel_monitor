@@ -86,7 +86,7 @@
             "expr": "pop_rate_limit_hit{direction=\"upload\",user_machine_ip=~\"$user_machines\"}",
             "instant": false,
             "interval": "",
-            "legendFormat": "{{exported_instance}}-{{user_machine_ip}}",
+            "legendFormat": "{{instance_alias}} ~ {{alias}}",
             "range": true,
             "refId": "A"
         }

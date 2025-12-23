@@ -70,7 +70,7 @@
             "editorMode": "code",
             "expr": "pop_wireguard_peer_status{exported_instance=~\"$pop_machines\"}",
             "instant": false,
-            "legendFormat": "{{exported_instance}}-{{peer_ip}}",
+            "legendFormat": "{{instance_alias}} ~ {{alias}}",
             "range": true,
             "refId": "A"
         }
