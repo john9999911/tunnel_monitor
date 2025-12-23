@@ -1,0 +1,68 @@
+{
+    "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "{{PROMETHEUS_UID}}"
+    },
+    "fieldConfig": {
+        "defaults": {
+            "mappings": [],
+            "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                    {
+                        "color": "green",
+                        "value": null
+                    },
+                    {
+                        "color": "red",
+                        "value": 80
+                    }
+                ]
+            },
+            "unit": "short"
+        },
+        "overrides": []
+    },
+    "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 0,
+        "y": 5
+    },
+    "id": 12,
+    "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+            "calcs": [
+                "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+    },
+    "pluginVersion": "11.2.2",
+    "targets": [
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "{{PROMETHEUS_UID}}"
+            },
+            "editorMode": "code",
+            "expr": "pop_wireguard_peer_count{exported_instance=~\"$pop_machines\"}",
+            "instant": false,
+            "legendFormat": "{{exported_instance}}",
+            "range": true,
+            "refId": "A"
+        }
+    ],
+    "title": "WireGuard peer连接数",
+    "type": "stat"
+}

@@ -1,0 +1,68 @@
+{
+    "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "{{PROMETHEUS_UID}}"
+    },
+    "description": "WireGuard peer发送的总字节数，user_machine_ip必须为用户内网IP",
+    "fieldConfig": {
+        "defaults": {
+            "color": {
+                "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                    {
+                        "color": "green",
+                        "value": null
+                    }
+                ]
+            },
+            "unit": "decbytes"
+        },
+        "overrides": []
+    },
+    "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 12,
+        "y": 24
+    },
+    "id": 16,
+    "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+            "calcs": [
+                "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+    },
+    "pluginVersion": "11.2.2",
+    "targets": [
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "{{PROMETHEUS_UID}}"
+            },
+            "editorMode": "code",
+            "expr": "pop_wireguard_tx_bytes{user_machine_ip=~\"$user_machines\"}",
+            "instant": false,
+            "legendFormat": "{{exported_instance}}-{{user_machine_ip}}",
+            "range": true,
+            "refId": "A"
+        }
+    ],
+    "title": "每个用户机器的发送字节数",
+    "type": "stat"
+}

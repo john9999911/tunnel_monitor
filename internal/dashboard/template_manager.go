@@ -42,6 +42,69 @@ func (tm *TemplateManager) LoadTemplateWithPanels(baseTemplatePath string, panel
 	return dashboard, nil
 }
 
+// LoadBusinessTemplateWithPanels 加载业务监控模板并组合客户端和服务端panels
+// 需要在客户端和服务端panels之间插入row面板
+func (tm *TemplateManager) LoadBusinessTemplateWithPanels(baseTemplatePath string, clientPanelsDir string, serverPanelsDir string) (map[string]interface{}, error) {
+	// 加载基础模板
+	dashboard, err := tm.loadBaseTemplate(baseTemplatePath)
+	if err != nil {
+		return nil, fmt.Errorf("加载基础模板失败: %w", err)
+	}
+
+	var allPanels []interface{}
+
+	// 添加客户端指标行标题
+	clientRow := map[string]interface{}{
+		"collapsed": false,
+		"gridPos": map[string]interface{}{
+			"h": 1,
+			"w": 24,
+			"x": 0,
+			"y": 0,
+		},
+		"id":     20,
+		"panels": []interface{}{},
+		"title":  "客户端指标",
+		"type":   "row",
+	}
+	allPanels = append(allPanels, clientRow)
+
+	// 加载客户端panels
+	clientPanels, err := tm.loadPanelsFromDir(tm.resolvePath(clientPanelsDir))
+	if err != nil && !os.IsNotExist(err) {
+		return nil, fmt.Errorf("加载客户端panels失败: %w", err)
+	}
+	allPanels = append(allPanels, clientPanels...)
+
+	// 添加服务端指标行标题
+	serverRow := map[string]interface{}{
+		"collapsed": false,
+		"gridPos": map[string]interface{}{
+			"h": 1,
+			"w": 24,
+			"x": 0,
+			"y": 32,
+		},
+		"id":     11,
+		"panels": []interface{}{},
+		"title":  "服务端指标",
+		"type":   "row",
+	}
+	allPanels = append(allPanels, serverRow)
+
+	// 加载服务端panels
+	serverPanels, err := tm.loadPanelsFromDir(tm.resolvePath(serverPanelsDir))
+	if err != nil && !os.IsNotExist(err) {
+		return nil, fmt.Errorf("加载服务端panels失败: %w", err)
+	}
+	allPanels = append(allPanels, serverPanels...)
+
+	// 替换原有的panels
+	dashboard["panels"] = allPanels
+
+	return dashboard, nil
+}
+
 // loadBaseTemplate 加载基础模板（不包含panels或包含基础panels）
 func (tm *TemplateManager) loadBaseTemplate(templatePath string) (map[string]interface{}, error) {
 	fullPath := tm.resolvePath(templatePath)

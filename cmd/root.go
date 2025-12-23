@@ -27,7 +27,7 @@ func Execute() error {
 
 func init() {
 	cobra.OnInitialize(initConfig)
-	
+
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "配置文件路径 (默认: ./config.yaml)")
 }
 
@@ -35,10 +35,9 @@ func initConfig() {
 	if cfgFile != "" {
 		config.SetConfigFile(cfgFile)
 	}
-	
+
 	if err := config.Load(); err != nil {
 		fmt.Fprintf(os.Stderr, "加载配置失败: %v\n", err)
 		os.Exit(1)
 	}
 }
-

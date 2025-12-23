@@ -1,0 +1,87 @@
+{
+    "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "{{PROMETHEUS_UID}}"
+    },
+    "fieldConfig": {
+        "defaults": {
+            "color": {
+                "mode": "thresholds"
+            },
+            "custom": {
+                "fillOpacity": 70,
+                "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                },
+                "insertNulls": false,
+                "lineWidth": 0,
+                "spanNulls": false
+            },
+            "mappings": [],
+            "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                    {
+                        "color": "green",
+                        "value": null
+                    }
+                ]
+            }
+        },
+        "overrides": []
+    },
+    "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 4,
+        "y": 33
+    },
+    "id": 6,
+    "options": {
+        "alignValue": "left",
+        "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+        },
+        "mergeValues": false,
+        "rowHeight": 0.9,
+        "showValue": "never",
+        "tooltip": {
+            "mode": "single",
+            "sort": "none"
+        }
+    },
+    "targets": [
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "{{PROMETHEUS_UID}}"
+            },
+            "editorMode": "code",
+            "expr": "server_health_check",
+            "instant": false,
+            "legendFormat": "服务端健康检查状态",
+            "range": true,
+            "refId": "A"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "{{PROMETHEUS_UID}}"
+            },
+            "editorMode": "code",
+            "expr": "server_db_status",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "数据库状态",
+            "range": true,
+            "refId": "B"
+        }
+    ],
+    "title": "服务端健康状态",
+    "type": "state-timeline"
+}

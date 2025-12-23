@@ -1,0 +1,80 @@
+{
+    "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "{{PROMETHEUS_UID}}"
+    },
+    "description": "DNS服务健康检查",
+    "fieldConfig": {
+        "defaults": {
+            "color": {
+                "mode": "continuous-GrYlRd"
+            },
+            "custom": {
+                "fillOpacity": 70,
+                "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                },
+                "insertNulls": false,
+                "lineWidth": 0,
+                "spanNulls": false
+            },
+            "mappings": [],
+            "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                    {
+                        "color": "green",
+                        "value": null
+                    },
+                    {
+                        "color": "red",
+                        "value": 80
+                    }
+                ]
+            }
+        },
+        "overrides": []
+    },
+    "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 17
+    },
+    "id": 15,
+    "options": {
+        "alignValue": "left",
+        "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "never",
+        "tooltip": {
+            "mode": "single",
+            "sort": "none"
+        }
+    },
+    "pluginVersion": "11.2.2",
+    "targets": [
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "{{PROMETHEUS_UID}}"
+            },
+            "editorMode": "code",
+            "expr": "pop_dns_service_status{exported_instance=~\"$pop_machines\"}",
+            "instant": false,
+            "legendFormat": "{{exported_instance}}",
+            "range": true,
+            "refId": "A"
+        }
+    ],
+    "title": "域名解析服务状态",
+    "type": "state-timeline"
+}

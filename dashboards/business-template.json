@@ -1,0 +1,127 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": {
+                    "type": "grafana",
+                    "uid": "-- Grafana --"
+                },
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+        {
+            "collapsed": false,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "id": 20,
+            "panels": [],
+            "title": "客户端指标",
+            "type": "row"
+        },
+        "{{CLIENT_PANELS}}",
+        {
+            "collapsed": false,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 32
+            },
+            "id": 11,
+            "panels": [],
+            "title": "服务端指标",
+            "type": "row"
+        },
+        "{{SERVER_PANELS}}"
+    ],
+    "refresh": "",
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+        "list": [
+            {
+                "datasource": {
+                    "type": "mysql",
+                    "uid": "{{MYSQL_UID}}"
+                },
+                "definition": "SELECT DISTINCT bandwidth_line_code FROM bandwidth_lines WHERE is_active=1 AND deleted_at IS NULL ORDER BY bandwidth_line_code",
+                "hide": 0,
+                "includeAll": true,
+                "allValue": "'%'",
+                "label": "带宽线路",
+                "multi": false,
+                "name": "bandwidth_line",
+                "options": [],
+                "query": "SELECT DISTINCT bandwidth_line_code FROM bandwidth_lines WHERE is_active=1 AND deleted_at IS NULL ORDER BY bandwidth_line_code",
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "type": "query"
+            },
+            {
+                "datasource": {
+                    "type": "mysql",
+                    "uid": "{{MYSQL_UID}}"
+                },
+                "definition": "SELECT DISTINCT m.intra_ip FROM bandwidth_lines bl JOIN machines m ON (bl.machine_a_code = m.machine_code OR bl.machine_b_code = m.machine_code) WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND m.deleted_at IS NULL AND m.type='pop' AND bl.bandwidth_line_code LIKE $bandwidth_line",
+                "hide": 0,
+                "includeAll": true,
+                "label": "POP机器列表",
+                "multi": true,
+                "name": "pop_machines",
+                "options": [],
+                "query": "SELECT DISTINCT m.intra_ip FROM bandwidth_lines bl JOIN machines m ON (bl.machine_a_code = m.machine_code OR bl.machine_b_code = m.machine_code) WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND m.deleted_at IS NULL AND m.type='pop' AND bl.bandwidth_line_code LIKE $bandwidth_line",
+                "refresh": 2,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "type": "query"
+            },
+            {
+                "datasource": {
+                    "type": "mysql",
+                    "uid": "{{MYSQL_UID}}"
+                },
+                "definition": "SELECT DISTINCT m.intra_ip FROM configs c JOIN machines m ON c.user_machine_code = m.machine_code WHERE c.deleted_at IS NULL AND m.deleted_at IS NULL AND c.status='active' AND c.bandwidth_line_code LIKE $bandwidth_line",
+                "hide": 0,
+                "includeAll": true,
+                "label": "用户机器列表",
+                "multi": true,
+                "name": "user_machines",
+                "options": [],
+                "query": "SELECT DISTINCT m.intra_ip FROM configs c JOIN machines m ON c.user_machine_code = m.machine_code WHERE c.deleted_at IS NULL AND m.deleted_at IS NULL AND c.status='active' AND c.bandwidth_line_code LIKE $bandwidth_line",
+                "refresh": 2,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "type": "query"
+            }
+        ]
+    },
+    "time": {
+        "from": "now-6h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "IPTunnel 业务监控",
+    "uid": "iptunnel-business",
+    "version": 1,
+    "weekStart": ""
+}

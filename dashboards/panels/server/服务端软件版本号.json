@@ -1,0 +1,69 @@
+{
+    "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "{{PROMETHEUS_UID}}"
+    },
+    "fieldConfig": {
+        "defaults": {
+            "mappings": [],
+            "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                    {
+                        "color": "green",
+                        "value": null
+                    },
+                    {
+                        "color": "red",
+                        "value": 80
+                    }
+                ]
+            },
+            "unit": "short"
+        },
+        "overrides": []
+    },
+    "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 33
+    },
+    "id": 5,
+    "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+            "calcs": [
+                "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "name",
+        "wideLayout": true
+    },
+    "pluginVersion": "11.2.2",
+    "targets": [
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "{{PROMETHEUS_UID}}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "server_version",
+            "instant": true,
+            "legendFormat": "{{servicename}} {{version}}",
+            "range": false,
+            "refId": "A"
+        }
+    ],
+    "title": "服务端软件版本号",
+    "type": "stat"
+}

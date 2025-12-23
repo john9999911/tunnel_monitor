@@ -14,22 +14,30 @@ grafana:
   username: "admin"
   password: "admin"
   # api_key: ""  # 可选，使用 API Key 替代用户名密码
+  prometheus_uid: "prometheus-datasource"  # Grafana中Prometheus数据源的UID，需要与实际UID一致
 
 # 服务端配置
 server:
   metrics_url: "http://localhost:8001/metrics"
   port: 8001
 
-# 客户端配置列表（可以从 Prometheus 自动发现，也可以手动配置）
-# 如果为空，将从 Prometheus 查询自动发现客户端实例
-clients: []
+# MySQL数据源配置（用于面板查询）
+mysql:
+  host: "localhost"
+  port: 3306
+  database: "iptunnel"
+  username: "root"
+  password: "your_password"
+  uid: "mysql-datasource"  # Grafana中MySQL数据源的UID，需要与实际UID一致
 
 # 面板模板路径（相对于 tunnel_monitor 目录）
 dashboards:
   server_template: "./dashboards/server-template.json"
   client_template: "./dashboards/client-template.json"
   database_template: "./dashboards/database-template.json"
+  business_template: "./dashboards/business-template.json"
   unified_uid: "pop-clients-unified"
   server_uid: "tunnel-server"
   database_uid: "tunnel-database"
+  business_uid: "iptunnel-business"
 

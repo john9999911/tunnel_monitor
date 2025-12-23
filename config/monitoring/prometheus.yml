@@ -1,29 +1,21 @@
 global:
-  scrape_interval: 15s
-  evaluation_interval: 15s
-
-rule_files:
-  # - "first_rules.yml"
-  # - "second_rules.yml"
-
+    scrape_interval: 15s
+    evaluation_interval: 15s
 scrape_configs:
-  # 服务端监控
-  - job_name: 'tunnel-server'
-    static_configs:
-      - targets: ['127.0.0.1:8001']
-    metrics_path: '/metrics'
-    scrape_interval: 5s
-    scrape_timeout: 5s
-
-  # POP 客户端监控（自动发现）
-  - job_name: 'tunnel-client-pop'
-    static_configs:
-      - targets:
-        - '[::1]:15323'  # POP_MACHINE_1985261265018163200
-        - '185.209.178.197:15323'  # POP_MACHINE_1985261267295670272
-        - '35.77.76.220:15323'  # POP_MACHINE_1985280962799341568
-        - '67.213.115.179:15323'  # POP_MACHINE_1985281063991119872
-    metrics_path: '/metrics'
-    scrape_interval: 5s
-    scrape_timeout: 5s
-
+    - job_name: tunnel-server
+      static_configs:
+        - targets:
+            - 127.0.0.1:8001
+      metrics_path: /metrics
+      scrape_interval: 5s
+      scrape_timeout: 5s
+    - job_name: tunnel-client-pop
+      static_configs:
+        - targets:
+            - '[::1]:15323'
+            - 185.209.178.197:15323
+            - 35.77.76.220:15323
+            - 67.213.115.179:15323
+      metrics_path: /metrics
+      scrape_interval: 5s
+      scrape_timeout: 5s

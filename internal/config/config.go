@@ -18,11 +18,12 @@ type Config struct {
 	} `yaml:"prometheus"`
 
 	Grafana struct {
-		URL      string `yaml:"url"`
-		Port     int    `yaml:"port"`
-		Username string `yaml:"username"`
-		Password string `yaml:"password"`
-		APIKey   string `yaml:"api_key"`
+		URL           string `yaml:"url"`
+		Port          int    `yaml:"port"`
+		Username      string `yaml:"username"`
+		Password      string `yaml:"password"`
+		APIKey        string `yaml:"api_key"`
+		PrometheusUID string `yaml:"prometheus_uid"` // Grafana中Prometheus数据源UID
 	} `yaml:"grafana"`
 
 	Server struct {
@@ -30,22 +31,26 @@ type Config struct {
 		Port       int    `yaml:"port"`
 	} `yaml:"server"`
 
-	Clients []ClientConfig `yaml:"clients"`
+	// MySQL数据源配置
+	MySQL struct {
+		Host     string `yaml:"host"`
+		Port     int    `yaml:"port"`
+		Database string `yaml:"database"`
+		Username string `yaml:"username"`
+		Password string `yaml:"password"`
+		UID      string `yaml:"uid"` // Grafana数据源UID
+	} `yaml:"mysql"`
 
 	Dashboards struct {
 		ServerTemplate   string `yaml:"server_template"`
 		ClientTemplate   string `yaml:"client_template"`
 		DatabaseTemplate string `yaml:"database_template"`
+		BusinessTemplate string `yaml:"business_template"`
 		UnifiedUID       string `yaml:"unified_uid"`
 		ServerUID        string `yaml:"server_uid"`
 		DatabaseUID      string `yaml:"database_uid"`
+		BusinessUID      string `yaml:"business_uid"`
 	} `yaml:"dashboards"`
-}
-
-type ClientConfig struct {
-	Name       string `yaml:"name"`
-	Instance   string `yaml:"instance"` // IP:PORT format
-	MetricsURL string `yaml:"metrics_url"`
 }
 
 var configFile = "./config.yaml"
@@ -85,6 +90,15 @@ func setDefaults() {
 	Global.Grafana.Port = 3000
 	Global.Grafana.Username = "admin"
 	Global.Grafana.Password = "admin"
+	Global.Grafana.PrometheusUID = "prometheus-datasource" // 默认Prometheus数据源UID
+
+	// MySQL默认值
+	Global.MySQL.Host = "localhost"
+	Global.MySQL.Port = 3306
+	Global.MySQL.Database = "iptunnel"
+	Global.MySQL.Username = "root"
+	Global.MySQL.Password = ""
+	Global.MySQL.UID = "mysql-datasource" // 默认MySQL数据源UID
 
 	Global.Server.MetricsURL = "http://localhost:8001/metrics"
 	Global.Server.Port = 8001

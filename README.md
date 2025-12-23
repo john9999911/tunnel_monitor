@@ -6,9 +6,10 @@
 
 - ✅ 自动安装 Prometheus 和 Grafana
 - ✅ 启动和停止监控服务
-- ✅ 创建和管理监控面板
-- ✅ 配置服务端和客户端监控 URL
-- ✅ 支持统一监控面板（使用变量选择客户端实例）
+- ✅ 创建和管理业务监控面板
+- ✅ 支持按带宽线路筛选监控数据
+- ✅ 统一展示客户端和服务端指标
+- ✅ 客户端监控数据由服务端转发，无需主动发现客户端
 - ✅ 独立于 tunnel_server，可单独使用
 
 ## 安装
@@ -24,10 +25,37 @@ go build -o tunnel-monitor
 配置文件 `config.yaml` 已经配置好，所有配置文件都在项目内部：
 
 - Prometheus 配置：`./config/monitoring/prometheus.yml`
-- 服务端面板模板：`./dashboards/server-template.json`
-- 客户端面板模板：`./dashboards/client-template.json`
+- 业务监控面板模板：`./dashboards/business-template.json`
+- 面板组件：`./dashboards/panels/client/` 和 `./dashboards/panels/server/`
 
 如果需要自定义配置，可以编辑 `config.yaml` 或使用 `--config` 参数指定配置文件。
+
+**重要配置项**：
+
+### MySQL数据源配置
+
+面板中的部分指标需要查询MySQL数据库（如带宽线路筛选、订单统计等）。需要配置MySQL数据源：
+
+```yaml
+mysql:
+  host: "localhost"
+  port: 3306
+  database: "iptunnel"
+  username: "root"
+  password: "your_password"
+  uid: "mysql-datasource"  # 必须与Grafana中MySQL数据源的UID一致
+```
+
+**配置步骤**：
+1. 在Grafana中创建MySQL数据源（Configuration → Data sources → Add MySQL）
+2. 配置连接信息并保存
+3. 记录数据源的UID（在URL中可以看到）
+4. 将该UID填入 `config.yaml` 的 `mysql.uid` 字段
+5. 重新创建面板：`./tunnel-monitor dashboard create`
+
+详细说明请参考：[MySQL数据源配置文档](docs/MYSQL_DATASOURCE.md)
+
+**注意**：客户端监控数据现在由服务端转发到Prometheus，无需配置客户端列表。
 
 ## 使用方法
 
@@ -67,18 +95,21 @@ go build -o tunnel-monitor
 ### 创建监控面板
 
 ```bash
-# 创建统一客户端监控面板（支持多客户端，使用变量选择）
-./tunnel-monitor dashboard create-unified
+# 创建业务监控面板（推荐 - 包含所有指标）
+./tunnel-monitor dashboard create
 
-# 创建统一服务端监控面板（支持多服务端部署，使用变量选择）
-./tunnel-monitor dashboard create-server
-
-# 创建数据库监控面板
-./tunnel-monitor dashboard create-database
+# 或者创建所有面板（同上）
+./tunnel-monitor dashboard create-all
 
 # 列出所有面板
 ./tunnel-monitor dashboard list
 ```
+
+**面板特性**：
+- 统一展示客户端和服务端指标
+- 支持按带宽线路筛选（选择"All"显示所有线路）
+- 客户端数据通过`exported_instance`标签区分不同的POP机器
+- 包含流量监控、延迟监控、状态监控、带宽分配等所有业务指标
 
 ## 完整工作流程
 
@@ -86,18 +117,25 @@ go build -o tunnel-monitor
 # 1. 安装监控组件
 sudo ./tunnel-monitor install
 
-# 2. 配置客户端（编辑 config.yaml）
-vim config.yaml
-
-# 3. 更新 Prometheus 配置
+# 2. 更新 Prometheus 配置（指向服务端metrics地址）
 ./tunnel-monitor prometheus update-config
 
-# 4. 启动监控服务
+# 3. 启动监控服务
 sudo ./tunnel-monitor start
 
-# 5. 创建监控面板
-./tunnel-monitor dashboard create-server      # 统一服务端监控面板
-./tunnel-monitor dashboard create-unified     # 统一客户端监控面板
+# 4. 创建业务监控面板
+./tunnel-monitor dashboard create
+
+# 5. 访问 Grafana (默认: http://localhost:3000)
+#    用户名: admin
+#    密码: admin
+```
+
+**监控架构说明**：
+- 客户端(POP)指标由服务端收集并转发到Prometheus
+- 服务端自身指标直接暴露给Prometheus
+- 所有指标统一在业务监控面板中展示
+- 使用`bandwidth_line_code`标签实现线路级别筛选
 ./tunnel-monitor dashboard create-database    # 数据库监控面板
 ```
 

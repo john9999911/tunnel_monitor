@@ -1,0 +1,96 @@
+{
+    "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "{{PROMETHEUS_UID}}"
+    },
+    "description": "",
+    "fieldConfig": {
+        "defaults": {
+            "color": {
+                "mode": "continuous-GrYlRd"
+            },
+            "custom": {
+                "fillOpacity": 70,
+                "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                },
+                "insertNulls": false,
+                "lineWidth": 0,
+                "spanNulls": false
+            },
+            "mappings": [
+                {
+                    "options": {
+                        "0": {
+                            "color": "green",
+                            "index": 0
+                        },
+                        "1": {
+                            "color": "red",
+                            "index": 1
+                        }
+                    },
+                    "type": "value"
+                }
+            ],
+            "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                    {
+                        "color": "green",
+                        "value": null
+                    },
+                    {
+                        "color": "red",
+                        "value": 80
+                    }
+                ]
+            }
+        },
+        "overrides": []
+    },
+    "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 24
+    },
+    "id": 22,
+    "options": {
+        "alignValue": "left",
+        "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "never",
+        "tooltip": {
+            "mode": "single",
+            "sort": "none"
+        }
+    },
+    "pluginVersion": "11.2.2",
+    "targets": [
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "{{PROMETHEUS_UID}}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "pop_rate_limit_hit{direction=\"upload\",user_machine_ip=~\"$user_machines\"}",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "{{exported_instance}}-{{user_machine_ip}}",
+            "range": true,
+            "refId": "A"
+        }
+    ],
+    "title": "用户上传限速触发",
+    "type": "state-timeline"
+}

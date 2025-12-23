@@ -12,37 +12,19 @@ var dashboardCmd = &cobra.Command{
 	Long:  "创建和管理 Grafana 监控面板",
 }
 
-var createUnifiedCmd = &cobra.Command{
-	Use:   "create-unified",
-	Short: "创建统一客户端监控面板",
-	Long:  "创建一个统一的面板，使用变量选择不同的客户端实例",
+var createBusinessCmd = &cobra.Command{
+	Use:   "create",
+	Short: "创建IPTunnel业务监控面板",
+	Long:  "创建业务监控面板，包含客户端和服务端所有指标，支持按带宽线路筛选",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return dashboard.CreateUnifiedDashboard()
-	},
-}
-
-var createServerCmd = &cobra.Command{
-	Use:   "create-server",
-	Short: "创建统一服务端监控面板",
-	Long:  "创建统一的服务端监控面板，支持多服务端部署（使用变量选择实例）",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		return dashboard.CreateServerDashboard()
-	},
-}
-
-var createDatabaseCmd = &cobra.Command{
-	Use:   "create-database",
-	Short: "创建数据库监控面板",
-	Long:  "创建数据库监控面板",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		return dashboard.CreateDatabaseDashboard()
+		return dashboard.CreateBusinessDashboard()
 	},
 }
 
 var createAllCmd = &cobra.Command{
 	Use:   "create-all",
 	Short: "创建所有监控面板",
-	Long:  "一次性创建客户端、服务端和数据库监控面板",
+	Long:  "创建业务监控面板（统一包含客户端、服务端和数据库指标）",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return dashboard.CreateAllDashboards()
 	},
@@ -58,10 +40,11 @@ var listCmd = &cobra.Command{
 }
 
 func init() {
-	dashboardCmd.AddCommand(createUnifiedCmd)
-	dashboardCmd.AddCommand(createServerCmd)
-	dashboardCmd.AddCommand(createDatabaseCmd)
+	// 主要命令
+	dashboardCmd.AddCommand(createBusinessCmd)
 	dashboardCmd.AddCommand(createAllCmd)
 	dashboardCmd.AddCommand(listCmd)
+	
 	rootCmd.AddCommand(dashboardCmd)
 }
+

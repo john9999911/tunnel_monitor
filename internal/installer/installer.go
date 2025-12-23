@@ -10,30 +10,30 @@ import (
 
 func InstallAll() error {
 	fmt.Println("🔧 开始安装监控组件...")
-	
+
 	if err := InstallPrometheus(); err != nil {
 		return fmt.Errorf("安装 Prometheus 失败: %w", err)
 	}
-	
+
 	if err := InstallGrafana(); err != nil {
 		return fmt.Errorf("安装 Grafana 失败: %w", err)
 	}
-	
+
 	fmt.Println("✅ 所有组件安装完成")
 	return nil
 }
 
 func InstallPrometheus() error {
 	fmt.Println("📦 检查 Prometheus...")
-	
+
 	// 检查是否已安装
 	if isCommandAvailable("prometheus") {
 		fmt.Println("✅ Prometheus 已安装")
 		return nil
 	}
-	
+
 	fmt.Println("📥 安装 Prometheus...")
-	
+
 	switch runtime.GOOS {
 	case "linux":
 		return installPrometheusLinux()
@@ -46,15 +46,15 @@ func InstallPrometheus() error {
 
 func InstallGrafana() error {
 	fmt.Println("📦 检查 Grafana...")
-	
+
 	// 检查是否已安装
 	if isCommandAvailable("grafana-server") || fileExists("/usr/sbin/grafana-server") {
 		fmt.Println("✅ Grafana 已安装")
 		return nil
 	}
-	
+
 	fmt.Println("📥 安装 Grafana...")
-	
+
 	switch runtime.GOOS {
 	case "linux":
 		return installGrafanaLinux()
@@ -68,13 +68,13 @@ func InstallGrafana() error {
 func installPrometheusLinux() error {
 	// 检测发行版
 	distro := detectLinuxDistro()
-	
+
 	if distro == "debian" || distro == "ubuntu" {
 		return installPrometheusDebian()
 	} else if distro == "redhat" || distro == "centos" {
 		return installPrometheusRedHat()
 	}
-	
+
 	return fmt.Errorf("不支持的 Linux 发行版: %s", distro)
 }
 
@@ -82,7 +82,7 @@ func installPrometheusDebian() error {
 	version := "2.48.0"
 	arch := "linux-amd64"
 	url := fmt.Sprintf("https://github.com/prometheus/prometheus/releases/download/v%s/prometheus-%s.%s.tar.gz", version, version, arch)
-	
+
 	// 下载并安装
 	cmd := exec.Command("bash", "-c", fmt.Sprintf(`
 		cd /tmp &&
@@ -92,10 +92,10 @@ func installPrometheusDebian() error {
 		sudo chmod +x /usr/local/bin/prometheus &&
 		rm -rf prometheus-*
 	`, url, version, arch, version, arch))
-	
+
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	
+
 	return cmd.Run()
 }
 
@@ -106,13 +106,13 @@ func installPrometheusRedHat() error {
 
 func installGrafanaLinux() error {
 	distro := detectLinuxDistro()
-	
+
 	if distro == "debian" || distro == "ubuntu" {
 		return installGrafanaDebian()
 	} else if distro == "redhat" || distro == "centos" {
 		return installGrafanaRedHat()
 	}
-	
+
 	return fmt.Errorf("不支持的 Linux 发行版: %s", distro)
 }
 
@@ -125,10 +125,10 @@ func installGrafanaDebian() error {
 		fi
 		sudo apt install -y grafana
 	`)
-	
+
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	
+
 	return cmd.Run()
 }
 
@@ -147,10 +147,10 @@ EOF
 		fi
 		sudo yum install -y grafana
 	`)
-	
+
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	
+
 	return cmd.Run()
 }
 
@@ -158,7 +158,7 @@ func installPrometheusMacOS() error {
 	cmd := exec.Command("brew", "install", "prometheus")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	
+
 	return cmd.Run()
 }
 
@@ -166,7 +166,7 @@ func installGrafanaMacOS() error {
 	cmd := exec.Command("brew", "install", "grafana")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	
+
 	return cmd.Run()
 }
 
@@ -186,7 +186,7 @@ func detectLinuxDistro() string {
 	if err != nil {
 		return "unknown"
 	}
-	
+
 	content := string(data)
 	if strings.Contains(content, "Ubuntu") || strings.Contains(content, "Debian") {
 		return "debian"
@@ -194,7 +194,6 @@ func detectLinuxDistro() string {
 	if strings.Contains(content, "CentOS") || strings.Contains(content, "Red Hat") || strings.Contains(content, "Rocky") {
 		return "redhat"
 	}
-	
+
 	return "unknown"
 }
-

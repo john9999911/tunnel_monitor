@@ -1,0 +1,80 @@
+{
+    "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "{{PROMETHEUS_UID}}"
+    },
+    "description": "基于WireGuard握手状态",
+    "fieldConfig": {
+        "defaults": {
+            "color": {
+                "mode": "continuous-GrYlRd"
+            },
+            "custom": {
+                "fillOpacity": 70,
+                "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                },
+                "insertNulls": false,
+                "lineWidth": 0,
+                "spanNulls": false
+            },
+            "mappings": [],
+            "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                    {
+                        "color": "green",
+                        "value": null
+                    },
+                    {
+                        "color": "red",
+                        "value": 80
+                    }
+                ]
+            }
+        },
+        "overrides": []
+    },
+    "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 17
+    },
+    "id": 13,
+    "options": {
+        "alignValue": "left",
+        "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "never",
+        "tooltip": {
+            "mode": "single",
+            "sort": "none"
+        }
+    },
+    "pluginVersion": "11.2.2",
+    "targets": [
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "{{PROMETHEUS_UID}}"
+            },
+            "editorMode": "code",
+            "expr": "pop_wireguard_peer_status{exported_instance=~\"$pop_machines\"}",
+            "instant": false,
+            "legendFormat": "{{exported_instance}}-{{peer_ip}}",
+            "range": true,
+            "refId": "A"
+        }
+    ],
+    "title": "与各peer节点连接状态",
+    "type": "state-timeline"
+}

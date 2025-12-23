@@ -2,6 +2,8 @@ package dashboard
 
 import (
 	"strings"
+
+	"tunnel-monitor/internal/config"
 )
 
 // AddInstanceVariable 为 dashboard 添加 instance 变量
@@ -38,10 +40,6 @@ func AddInstanceVariable(dashboard map[string]interface{}, instances []string) e
 		"name":  "instance",
 		"type":  "custom",
 		"label": label,
-		"current": map[string]interface{}{
-			"text":  options[0]["text"],
-			"value": options[0]["value"],
-		},
 		"options":     options,
 		"query":       strings.Join(instances, ","),
 		"hide":        0,
@@ -133,8 +131,15 @@ func fixDatasourceRecursive(obj interface{}) {
 	switch v := obj.(type) {
 	case map[string]interface{}:
 		if ds, ok := v["datasource"].(map[string]interface{}); ok {
-			if uid, ok := ds["uid"].(string); ok && uid == "prometheus" {
-				ds["uid"] = "ef32in03bdb0gb"
+			if uid, ok := ds["uid"].(string); ok {
+				switch uid {
+				case "{{PROMETHEUS_UID}}":
+					// 替换Prometheus数据源UID占位符
+					ds["uid"] = config.Global.Grafana.PrometheusUID
+				case "{{MYSQL_UID}}":
+					// 替换MySQL数据源UID占位符
+					ds["uid"] = config.Global.MySQL.UID
+				}
 			}
 		}
 		for _, val := range v {
@@ -243,9 +248,10 @@ func addInstanceVariableToQuery(expr string) string {
 func findMatchingCloseParen(expr string, openParen int) int {
 	depth := 1
 	for i := openParen + 1; i < len(expr); i++ {
-		if expr[i] == '(' {
+		switch expr[i] {
+		case '(':
 			depth++
-		} else if expr[i] == ')' {
+		case ')':
 			depth--
 			if depth == 0 {
 				return i
@@ -359,13 +365,14 @@ func AddUsernameControlToPacketRatePanel(dashboard map[string]interface{}) error
 			// 当选择特定用户时，count=1（或小于总用户数），隐藏总体
 			// 技巧：当count等于总用户数时（即选择了All），显示总体；否则返回0
 
-			if refId == "A" {
+			switch refId {
+			case "A":
 				// RX Packets Total：当用户查询匹配的用户数等于总用户数时显示，否则返回0
 				// 使用count检查：count(用户查询) == count(所有用户) ? 显示总体 : 返回0
 				// 总用户数通过count(count(net_user_rx_packets) by (username))获取
 				newExpr := "(count(sum(rate(net_user_rx_packets{username=~\"$username\"}[1m])) by (username)) == count(count(net_user_rx_packets) by (username))) * rate(net_interface_rx_packets{iface=\"wg0\"}[1m])"
 				target["expr"] = newExpr
-			} else if refId == "B" {
+			case "B":
 				// TX Packets Total：当用户查询匹配的用户数等于总用户数时显示，否则返回0
 				newExpr := "(count(sum(rate(net_user_tx_packets{username=~\"$username\"}[1m])) by (username)) == count(count(net_user_tx_packets) by (username))) * rate(net_interface_tx_packets{iface=\"wg0\"}[1m])"
 				target["expr"] = newExpr

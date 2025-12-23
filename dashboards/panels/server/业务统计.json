@@ -1,0 +1,172 @@
+{
+    "datasource": {
+        "default": false,
+        "type": "mysql",
+        "uid": "{{MYSQL_UID}}"
+    },
+    "fieldConfig": {
+        "defaults": {
+            "color": {
+                "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                    {
+                        "color": "green",
+                        "value": null
+                    },
+                    {
+                        "color": "red",
+                        "value": 80
+                    }
+                ]
+            }
+        },
+        "overrides": []
+    },
+    "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 0,
+        "y": 37
+    },
+    "id": 4,
+    "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+            "calcs": [
+                "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+    },
+    "pluginVersion": "11.2.2",
+    "targets": [
+        {
+            "datasource": {
+                "type": "mysql",
+                "uid": "{{MYSQL_UID}}"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT COUNT(*) AS \"POP机个数\" FROM machines WHERE type='pop' AND deleted_at IS NULL",
+            "refId": "A",
+            "sql": {
+                "columns": [
+                    {
+                        "parameters": [],
+                        "type": "function"
+                    }
+                ],
+                "groupBy": [
+                    {
+                        "property": {
+                            "type": "string"
+                        },
+                        "type": "groupBy"
+                    }
+                ],
+                "limit": 50
+            }
+        },
+        {
+            "datasource": {
+                "type": "mysql",
+                "uid": "{{MYSQL_UID}}"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "hide": false,
+            "rawQuery": true,
+            "rawSql": "SELECT COUNT(*) as \"已分配内网数\" FROM intra_ips WHERE allocated=1 AND deleted_at IS NULL",
+            "refId": "B",
+            "sql": {
+                "columns": [
+                    {
+                        "parameters": [],
+                        "type": "function"
+                    }
+                ],
+                "groupBy": [
+                    {
+                        "property": {
+                            "type": "string"
+                        },
+                        "type": "groupBy"
+                    }
+                ],
+                "limit": 50
+            }
+        },
+        {
+            "datasource": {
+                "type": "mysql",
+                "uid": "{{MYSQL_UID}}"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "hide": false,
+            "rawQuery": true,
+            "rawSql": "SELECT COUNT(*) as \"用户总数\" FROM users WHERE deleted_at IS NULL",
+            "refId": "C",
+            "sql": {
+                "columns": [
+                    {
+                        "parameters": [],
+                        "type": "function"
+                    }
+                ],
+                "groupBy": [
+                    {
+                        "property": {
+                            "type": "string"
+                        },
+                        "type": "groupBy"
+                    }
+                ],
+                "limit": 50
+            }
+        },
+        {
+            "datasource": {
+                "type": "mysql",
+                "uid": "{{MYSQL_UID}}"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "hide": false,
+            "rawQuery": true,
+            "rawSql": "SELECT COUNT(DISTINCT user_code) as \"活跃用户数\" FROM orders WHERE deleted_at IS NULL",
+            "refId": "D",
+            "sql": {
+                "columns": [
+                    {
+                        "parameters": [],
+                        "type": "function"
+                    }
+                ],
+                "groupBy": [
+                    {
+                        "property": {
+                            "type": "string"
+                        },
+                        "type": "groupBy"
+                    }
+                ],
+                "limit": 50
+            }
+        }
+    ],
+    "type": "stat"
+}

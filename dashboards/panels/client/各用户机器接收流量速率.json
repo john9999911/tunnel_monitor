@@ -1,0 +1,102 @@
+{
+    "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "{{PROMETHEUS_UID}}"
+    },
+    "description": "基于接收字节数的瞬时速率",
+    "fieldConfig": {
+        "defaults": {
+            "color": {
+                "mode": "palette-classic"
+            },
+            "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                    "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                },
+                "thresholdsStyle": {
+                    "mode": "off"
+                }
+            },
+            "mappings": [],
+            "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                    {
+                        "color": "green",
+                        "value": null
+                    },
+                    {
+                        "color": "red",
+                        "value": 80
+                    }
+                ]
+            }
+        },
+        "overrides": []
+    },
+    "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 9
+    },
+    "id": 18,
+    "options": {
+        "legend": {
+            "calcs": [
+                "min",
+                "max",
+                "lastNotNull"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+        },
+        "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+        }
+    },
+    "targets": [
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "{{PROMETHEUS_UID}}"
+            },
+            "editorMode": "code",
+            "expr": "pop_traffic_rx_rate{user_machine_ip=~\"$user_machines\"} / 1000",
+            "instant": false,
+            "legendFormat": "{{exported_instance}}-{{user_machine_ip}}",
+            "range": true,
+            "refId": "A"
+        }
+    ],
+    "title": "各用户机器接收流量速率（kbps)",
+    "type": "timeseries"
+}

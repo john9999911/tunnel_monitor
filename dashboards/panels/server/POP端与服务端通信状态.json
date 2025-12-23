@@ -1,0 +1,94 @@
+{
+    "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "{{PROMETHEUS_UID}}"
+    },
+    "description": "定期心跳检查",
+    "fieldConfig": {
+        "defaults": {
+            "color": {
+                "mode": "continuous-GrYlRd"
+            },
+            "custom": {
+                "fillOpacity": 70,
+                "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                },
+                "insertNulls": false,
+                "lineWidth": 0,
+                "spanNulls": false
+            },
+            "mappings": [
+                {
+                    "options": {
+                        "0": {
+                            "color": "red",
+                            "index": 1
+                        },
+                        "1": {
+                            "color": "green",
+                            "index": 0
+                        }
+                    },
+                    "type": "value"
+                }
+            ],
+            "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                    {
+                        "color": "green",
+                        "value": null
+                    },
+                    {
+                        "color": "red",
+                        "value": 80
+                    }
+                ]
+            }
+        },
+        "overrides": []
+    },
+    "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 41
+    },
+    "id": 7,
+    "options": {
+        "alignValue": "left",
+        "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "never",
+        "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+        }
+    },
+    "pluginVersion": "11.2.2",
+    "targets": [
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "{{PROMETHEUS_UID}}"
+            },
+            "editorMode": "code",
+            "expr": "server_pop_communication_status{pop_intra_ip=~\"$pop_machines\"}",
+            "instant": false,
+            "legendFormat": "{{pop_id}}",
+            "range": true,
+            "refId": "A"
+        }
+    ],
+    "title": "POP端与服务端通信状态",
+    "type": "state-timeline"
+}

@@ -1,0 +1,121 @@
+{
+    "datasource": {
+        "default": false,
+        "type": "mysql",
+        "uid": "{{MYSQL_UID}}"
+    },
+    "fieldConfig": {
+        "defaults": {
+            "color": {
+                "mode": "palette-classic"
+            },
+            "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "fillOpacity": 39,
+                "gradientMode": "none",
+                "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                },
+                "lineWidth": 1,
+                "scaleDistribution": {
+                    "type": "linear"
+                },
+                "thresholdsStyle": {
+                    "mode": "off"
+                }
+            },
+            "mappings": [],
+            "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                    {
+                        "color": "green",
+                        "value": null
+                    }
+                ]
+            },
+            "unit": "short"
+        },
+        "overrides": [
+            {
+                "matcher": {
+                    "id": "byName",
+                    "options": "COUNT(*)"
+                },
+                "properties": [
+                    {
+                        "id": "displayName",
+                        "value": "订单个数"
+                    }
+                ]
+            }
+        ]
+    },
+    "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 33
+    },
+    "id": 3,
+    "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "right",
+            "showLegend": false
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "none",
+        "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+    },
+    "pluginVersion": "11.2.2",
+    "targets": [
+        {
+            "datasource": {
+                "type": "mysql",
+                "uid": "{{MYSQL_UID}}"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT user_code, COUNT(*)  FROM orders WHERE deleted_at IS NULL GROUP BY user_code",
+            "refId": "A",
+            "sql": {
+                "columns": [
+                    {
+                        "parameters": [],
+                        "type": "function"
+                    }
+                ],
+                "groupBy": [
+                    {
+                        "property": {
+                            "type": "string"
+                        },
+                        "type": "groupBy"
+                    }
+                ],
+                "limit": 50
+            }
+        }
+    ],
+    "title": "各用户订单个数",
+    "type": "barchart"
+}

@@ -29,11 +29,11 @@ func StopAll() error {
 	fmt.Println("🛑 停止监控服务...")
 
 	if err := StopPrometheus(); err != nil {
-		fmt.Printf("⚠️  停止 Prometheus 失败: %v\n", err)
+		fmt.Printf("⚠️ 停止 Prometheus 失败: %v\n", err)
 	}
 
 	if err := StopGrafana(); err != nil {
-		fmt.Printf("⚠️  停止 Grafana 失败: %v\n", err)
+		fmt.Printf("⚠️ 停止 Grafana 失败: %v\n", err)
 	}
 
 	fmt.Println("✅ 服务已停止")
@@ -73,7 +73,7 @@ func StartPrometheus() error {
 		cwd, _ := os.Getwd()
 		configFile = fmt.Sprintf("%s/%s", cwd, configFile)
 	}
-	
+
 	args := []string{
 		"--config.file=" + configFile,
 		"--storage.tsdb.path=" + dataDir,
