@@ -84,7 +84,7 @@
             "editorMode": "code",
             "expr": "server_pop_communication_status{instance=~\"$instance\"}",
             "instant": false,
-            "legendFormat": "{{pop_id}}",
+            "legendFormat": "{{alias}}",
             "range": true,
             "refId": "A"
         }
