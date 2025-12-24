@@ -1,0 +1,59 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": {
+                    "type": "grafana",
+                    "uid": "-- Grafana --"
+                },
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [],
+    "refresh": "",
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+        "list": [
+            {
+                "datasource": {
+                    "type": "prometheus",
+                    "uid": "{{PROMETHEUS_UID}}"
+                },
+                "definition": "label_values(instance)",
+                "hide": 0,
+                "includeAll": true,
+                "label": "实例",
+                "multi": false,
+                "name": "instance",
+                "options": [],
+                "query": "label_values(instance)",
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "type": "query"
+            }
+        ]
+    },
+    "time": {
+        "from": "now-6h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "IPTunnel 服务端监控",
+    "uid": "iptunnel-server-monitoring",
+    "version": 1,
+    "weekStart": ""
+}

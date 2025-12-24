@@ -58,18 +58,18 @@ func LoadServerTemplate() (map[string]interface{}, error) {
 	cfg := config.Global
 	templateFile := cfg.Dashboards.ServerTemplate
 	if templateFile == "" {
-		templateFile = "./dashboards/server-template.json"
+		templateFile = "./dashboards/iptunnel-server-monitoring.json"
 	}
 
 	// 尝试使用拆分模板
-	baseTemplate := "./dashboards/server-base.json"
-	panelsDir := "./dashboards/panels/server"
+	baseTemplate := "./dashboards/iptunnel-server-monitoring-base.json"
+	serverPanelsDir := "./dashboards/panels/server"
 
 	// 如果存在拆分后的基础模板和panels目录，使用模板管理器加载
 	if _, err := os.Stat(baseTemplate); err == nil {
-		if _, err := os.Stat(panelsDir); err == nil {
+		if _, err := os.Stat(serverPanelsDir); err == nil {
 			tm := NewTemplateManager("")
-			return tm.LoadTemplateWithPanels(baseTemplate, panelsDir)
+			return tm.LoadServerMonitoringTemplateWithPanels(baseTemplate, serverPanelsDir)
 		}
 	}
 
@@ -102,7 +102,7 @@ func LoadDatabaseTemplate() (map[string]interface{}, error) {
 	return LoadTemplate(templateFile)
 }
 
-// LoadBusinessTemplate 加载业务监控模板（包含客户端和服务端指标）
+// LoadBusinessTemplate 加载业务监控模板（包含客户端功能业务）
 // 优先尝试使用拆分后的模板（基础模板+panels目录），如果不存在则使用完整模板
 func LoadBusinessTemplate() (map[string]interface{}, error) {
 	cfg := config.Global
@@ -114,15 +114,12 @@ func LoadBusinessTemplate() (map[string]interface{}, error) {
 	// 尝试使用拆分模板
 	baseTemplate := "./dashboards/business-base.json"
 	clientPanelsDir := "./dashboards/panels/client"
-	serverPanelsDir := "./dashboards/panels/server"
 
 	// 如果存在拆分后的基础模板和panels目录，使用模板管理器加载
 	if _, err := os.Stat(baseTemplate); err == nil {
 		if _, err1 := os.Stat(clientPanelsDir); err1 == nil {
-			if _, err2 := os.Stat(serverPanelsDir); err2 == nil {
-				tm := NewTemplateManager("")
-				return tm.LoadBusinessTemplateWithPanels(baseTemplate, clientPanelsDir, serverPanelsDir)
-			}
+			tm := NewTemplateManager("")
+			return tm.LoadBusinessTemplateWithPanels(baseTemplate, clientPanelsDir)
 		}
 	}
 

@@ -21,10 +21,19 @@ var createBusinessCmd = &cobra.Command{
 	},
 }
 
+var createServerCmd = &cobra.Command{
+	Use:   "create-server",
+	Short: "创建IPTunnel服务端监控面板",
+	Long:  "创建服务端监控面板，专注于服务端健康状态、通信状态和业务统计",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return dashboard.CreateServerDashboard()
+	},
+}
+
 var createAllCmd = &cobra.Command{
 	Use:   "create-all",
 	Short: "创建所有监控面板",
-	Long:  "创建业务监控面板（统一包含客户端、服务端和数据库指标）",
+	Long:  "创建业务监控面板和服务端监控面板",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return dashboard.CreateAllDashboards()
 	},
@@ -42,9 +51,9 @@ var listCmd = &cobra.Command{
 func init() {
 	// 主要命令
 	dashboardCmd.AddCommand(createBusinessCmd)
+	dashboardCmd.AddCommand(createServerCmd)
 	dashboardCmd.AddCommand(createAllCmd)
 	dashboardCmd.AddCommand(listCmd)
 	
 	rootCmd.AddCommand(dashboardCmd)
 }
-

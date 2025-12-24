@@ -25,7 +25,7 @@
         "overrides": []
     },
     "gridPos": {
-        "h": 4,
+        "h": 8,
         "w": 4,
         "x": 0,
         "y": 33
@@ -35,7 +35,7 @@
         "colorMode": "background",
         "graphMode": "none",
         "justifyMode": "auto",
-        "orientation": "auto",
+        "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
             "calcs": [
@@ -59,7 +59,7 @@
             "exemplar": false,
             "expr": "server_version",
             "instant": true,
-            "legendFormat": "{{servicename}} {{version}}",
+            "legendFormat": "{{instance}} ~ {{version}}",
             "range": false,
             "refId": "A"
         }

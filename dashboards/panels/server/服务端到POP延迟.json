@@ -90,7 +90,7 @@
                 "uid": "{{PROMETHEUS_UID}}"
             },
             "editorMode": "code",
-            "expr": "server_pop_latency{pop_intra_ip=~\"$pop_machines\"}",
+            "expr": "server_pop_latency{instance=~\"$instance\"}",
             "instant": false,
             "legendFormat": "{{pop_intra_ip}} ({{pop_ip}})",
             "range": true,

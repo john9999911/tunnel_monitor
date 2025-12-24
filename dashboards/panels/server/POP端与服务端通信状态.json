@@ -82,7 +82,7 @@
                 "uid": "{{PROMETHEUS_UID}}"
             },
             "editorMode": "code",
-            "expr": "server_pop_communication_status{pop_intra_ip=~\"$pop_machines\"}",
+            "expr": "server_pop_communication_status{instance=~\"$instance\"}",
             "instant": false,
             "legendFormat": "{{pop_id}}",
             "range": true,

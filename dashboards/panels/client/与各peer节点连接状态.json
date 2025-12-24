@@ -8,7 +8,7 @@
     "fieldConfig": {
         "defaults": {
             "color": {
-                "mode": "continuous-GrYlRd"
+                "mode": "thresholds"
             },
             "custom": {
                 "fillOpacity": 70,
@@ -26,12 +26,12 @@
                 "mode": "absolute",
                 "steps": [
                     {
-                        "color": "green",
+                        "color": "red",
                         "value": null
                     },
                     {
-                        "color": "red",
-                        "value": 80
+                        "color": "green",
+                        "value": 0.5
                     }
                 ]
             }
