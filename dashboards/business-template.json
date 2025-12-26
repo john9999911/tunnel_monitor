@@ -87,7 +87,7 @@
                 "name": "pop_machines",
                 "options": [],
                 "query": "SELECT DISTINCT m.intra_ip FROM bandwidth_lines bl JOIN machines m ON (bl.machine_a_code = m.machine_code OR bl.machine_b_code = m.machine_code) WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND m.deleted_at IS NULL AND m.type='pop' AND bl.bandwidth_line_code LIKE $bandwidth_line",
-                "refresh": 2,
+                "refresh": 1,
                 "regex": "",
                 "skipUrlSync": false,
                 "sort": 0,
