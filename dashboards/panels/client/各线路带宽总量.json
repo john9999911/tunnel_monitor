@@ -89,7 +89,7 @@
             "editorMode": "code",
             "format": "table",
             "rawQuery": true,
-            "rawSql": "SELECT bandwidth_line_code, total_bandwidth FROM bandwidth_lines WHERE is_active=1 AND deleted_at IS NULL AND bandwidth_line_code LIKE ${bandwidth_line:singlequote}",
+            "rawSql": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS bandwidth_line_display, bl.bandwidth_line_code, bl.total_bandwidth FROM bandwidth_lines bl JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL AND bl.bandwidth_line_code LIKE $bandwidth_line",
             "refId": "A",
             "sql": {
                 "columns": [
@@ -119,7 +119,7 @@
             "format": "table",
             "hide": false,
             "rawQuery": true,
-            "rawSql": "SELECT bandwidth_line_code, user_code, SUM(bandwidth) FROM configs WHERE status='active' AND deleted_at IS NULL AND bandwidth_line_code LIKE ${bandwidth_line:singlequote} GROUP BY bandwidth_line_code, user_code",
+            "rawSql": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS bandwidth_line_display, c.bandwidth_line_code, c.user_code, SUM(c.bandwidth) AS total_bandwidth_used FROM configs c JOIN bandwidth_lines bl ON c.bandwidth_line_code = bl.bandwidth_line_code JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE c.status='active' AND c.deleted_at IS NULL AND bl.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL AND c.bandwidth_line_code LIKE $bandwidth_line GROUP BY bandwidth_line_display, c.bandwidth_line_code, c.user_code",
             "refId": "B",
             "sql": {
                 "columns": [
@@ -145,7 +145,7 @@
         {
             "id": "joinByField",
             "options": {
-                "byField": "bandwidth_line_code",
+                "byField": "bandwidth_line_display",
                 "mode": "outerTabular"
             }
         },
@@ -153,7 +153,7 @@
             "id": "calculateField",
             "options": {
                 "binary": {
-                    "left": "SUM(bandwidth)",
+                    "left": "total_bandwidth_used",
                     "operator": "/",
                     "right": "total_bandwidth"
                 },
@@ -167,7 +167,7 @@
             "id": "calculateField",
             "options": {
                 "binary": {
-                    "left": "SUM(bandwidth) / total_bandwidth",
+                    "left": "total_bandwidth_used / total_bandwidth",
                     "operator": "*",
                     "right": "100"
                 },
@@ -181,17 +181,18 @@
             "id": "organize",
             "options": {
                 "excludeByName": {
-                    "SUM(bandwidth) / total_bandwidth": true,
+                    "bandwidth_line_code": true,
+                    "total_bandwidth_used / total_bandwidth": true,
                     "user_code": true
                 },
                 "includeByName": {},
                 "indexByName": {},
                 "renameByName": {
-                    "SUM(bandwidth)": "带宽购买情况（Mbps）",
-                    "SUM(bandwidth) / total_bandwidth": "",
-                    "SUM(bandwidth) / total_bandwidth * 100": "各线路带宽使用率",
-                    "bandwidth_line_code": "线路",
-                    "total_bandwidth": "带宽总量（Mbps）"
+                    "bandwidth_line_display": "线路",
+                    "total_bandwidth": "带宽总量（Mbps）",
+                    "total_bandwidth_used": "带宽购买情况（Mbps）",
+                    "total_bandwidth_used / total_bandwidth": "",
+                    "total_bandwidth_used / total_bandwidth * 100": "各线路带宽使用率"
                 }
             }
         }

@@ -61,7 +61,7 @@
             "format": "time_series",
             "instant": false,
             "interval": "",
-            "legendFormat": "{{instance_alias}} ~ {{version}}",
+            "legendFormat": "{{exported_instance}} ~ {{version}}",
             "range": true,
             "refId": "A"
         }

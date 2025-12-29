@@ -90,9 +90,9 @@
                 "uid": "{{PROMETHEUS_UID}}"
             },
             "editorMode": "code",
-            "expr": "pop_traffic_tx_rate{user_machine_ip=~\"$user_machines\"} / 1000",
+            "expr": "pop_traffic_tx_rate{user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"} / 1000",
             "instant": false,
-            "legendFormat": "{{instance_alias}} ~ {{alias}}",
+            "legendFormat": "{{instance_alias}} - {{alias}}",
             "range": true,
             "refId": "A"
         }

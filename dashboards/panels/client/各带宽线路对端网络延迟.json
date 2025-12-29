@@ -87,9 +87,9 @@
                 "uid": "{{PROMETHEUS_UID}}"
             },
             "editorMode": "code",
-            "expr": "pop_wireguard_latency{exported_instance=~\"$pop_machines\"}",
+            "expr": "pop_wireguard_latency{exported_instance=~\"$pop_machines\",peer_ip=~\"$pop_machines\"}",
             "instant": false,
-            "legendFormat": "{{instance_alias}} ~ {{alias}}",
+            "legendFormat": "{{instance_alias}} - {{alias}}",
             "range": true,
             "refId": "A"
         }

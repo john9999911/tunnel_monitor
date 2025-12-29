@@ -56,9 +56,9 @@
                 "uid": "{{PROMETHEUS_UID}}"
             },
             "editorMode": "code",
-            "expr": "pop_wireguard_rx_bytes{user_machine_ip=~\"$user_machines\"}",
+            "expr": "pop_wireguard_rx_bytes{user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"}",
             "instant": false,
-            "legendFormat": "{{instance_alias}} ~ {{alias}}",
+            "legendFormat": "{{instance_alias}} - {{alias}}",
             "range": true,
             "refId": "A"
         }

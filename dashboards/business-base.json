@@ -20,25 +20,30 @@
     "graphTooltip": 0,
     "links": [],
     "panels": [],
-    "refresh": "",
+    "refresh": "10s",
     "schemaVersion": 39,
     "tags": [],
     "templating": {
         "list": [
             {
+                "allValue": "'%'",
+                "current": {
+                    "selected": false,
+                    "text": "All",
+                    "value": "$__all"
+                },
                 "datasource": {
                     "type": "mysql",
                     "uid": "{{MYSQL_UID}}"
                 },
-                "definition": "SELECT DISTINCT bandwidth_line_code FROM bandwidth_lines WHERE is_active=1 AND deleted_at IS NULL ORDER BY bandwidth_line_code",
+                "definition": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS __text, bl.bandwidth_line_code AS __value FROM bandwidth_lines bl JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND ma.deleted_at IS NULL AND mb.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL ORDER BY ma.alias, mb.alias",
                 "hide": 0,
                 "includeAll": true,
-                "allValue": "'%'",
                 "label": "带宽线路",
                 "multi": false,
                 "name": "bandwidth_line",
                 "options": [],
-                "query": "SELECT DISTINCT bandwidth_line_code FROM bandwidth_lines WHERE is_active=1 AND deleted_at IS NULL ORDER BY bandwidth_line_code",
+                "query": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS __text, bl.bandwidth_line_code AS __value FROM bandwidth_lines bl JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND ma.deleted_at IS NULL AND mb.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL ORDER BY ma.alias, mb.alias",
                 "refresh": 1,
                 "regex": "",
                 "skipUrlSync": false,
@@ -46,47 +51,57 @@
                 "type": "query"
             },
             {
+                "current": {
+                    "selected": false,
+                    "text": "All",
+                    "value": "$__all"
+                },
                 "datasource": {
                     "type": "mysql",
                     "uid": "{{MYSQL_UID}}"
                 },
-                "definition": "SELECT DISTINCT m.intra_ip FROM bandwidth_lines bl JOIN machines m ON (bl.machine_a_code = m.machine_code OR bl.machine_b_code = m.machine_code) WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND m.deleted_at IS NULL AND m.type='pop' AND bl.bandwidth_line_code LIKE $bandwidth_line",
+                "definition": "SELECT DISTINCT m.alias AS __text, m.intra_ip AS __value FROM bandwidth_lines bl JOIN machines m ON (bl.machine_a_code = m.machine_code OR bl.machine_b_code = m.machine_code) WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND m.deleted_at IS NULL AND m.type='pop' AND m.alias IS NOT NULL AND bl.bandwidth_line_code LIKE $bandwidth_line ORDER BY m.alias",
                 "hide": 0,
                 "includeAll": true,
                 "label": "POP机器列表",
                 "multi": true,
                 "name": "pop_machines",
                 "options": [],
-                "query": "SELECT DISTINCT m.intra_ip FROM bandwidth_lines bl JOIN machines m ON (bl.machine_a_code = m.machine_code OR bl.machine_b_code = m.machine_code) WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND m.deleted_at IS NULL AND m.type='pop' AND bl.bandwidth_line_code LIKE $bandwidth_line",
-                "refresh": 1,
+                "query": "SELECT DISTINCT m.alias AS __text, m.intra_ip AS __value FROM bandwidth_lines bl JOIN machines m ON (bl.machine_a_code = m.machine_code OR bl.machine_b_code = m.machine_code) WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND m.deleted_at IS NULL AND m.type='pop' AND m.alias IS NOT NULL AND bl.bandwidth_line_code LIKE $bandwidth_line ORDER BY m.alias",
+                "refresh": 2,
                 "regex": "",
                 "skipUrlSync": false,
-                "sort": 0,
+                "sort": 1,
                 "type": "query"
             },
             {
+                "current": {
+                    "selected": false,
+                    "text": "All",
+                    "value": "$__all"
+                },
                 "datasource": {
                     "type": "mysql",
                     "uid": "{{MYSQL_UID}}"
                 },
-                "definition": "SELECT DISTINCT m.intra_ip FROM configs c JOIN machines m ON c.user_machine_code = m.machine_code WHERE c.deleted_at IS NULL AND m.deleted_at IS NULL AND c.status='active' AND c.bandwidth_line_code LIKE $bandwidth_line",
+                "definition": "SELECT DISTINCT m.alias AS __text, m.intra_ip AS __value FROM configs c JOIN machines m ON c.user_machine_code = m.machine_code WHERE c.deleted_at IS NULL AND m.deleted_at IS NULL AND c.status='active' AND m.alias IS NOT NULL AND c.bandwidth_line_code LIKE $bandwidth_line ORDER BY m.alias",
                 "hide": 0,
                 "includeAll": true,
                 "label": "用户机器列表",
                 "multi": true,
                 "name": "user_machines",
                 "options": [],
-                "query": "SELECT DISTINCT m.intra_ip FROM configs c JOIN machines m ON c.user_machine_code = m.machine_code WHERE c.deleted_at IS NULL AND m.deleted_at IS NULL AND c.status='active' AND c.bandwidth_line_code LIKE $bandwidth_line",
+                "query": "SELECT DISTINCT m.alias AS __text, m.intra_ip AS __value FROM configs c JOIN machines m ON c.user_machine_code = m.machine_code WHERE c.deleted_at IS NULL AND m.deleted_at IS NULL AND c.status='active' AND m.alias IS NOT NULL AND c.bandwidth_line_code LIKE $bandwidth_line ORDER BY m.alias",
                 "refresh": 2,
                 "regex": "",
                 "skipUrlSync": false,
-                "sort": 0,
+                "sort": 1,
                 "type": "query"
             }
         ]
     },
     "time": {
-        "from": "now-6h",
+        "from": "now-5m",
         "to": "now"
     },
     "timepicker": {},

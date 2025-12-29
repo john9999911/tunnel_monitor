@@ -83,10 +83,10 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "pop_rate_limit_hit{direction=\"download\",user_machine_ip=~\"$user_machines\"}",
+            "expr": "pop_rate_limit_hit{direction=\"download\",user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"}",
             "hide": false,
             "instant": false,
-            "legendFormat": "{{alias}}",
+            "legendFormat": "{{instance_alias}} - {{alias}}",
             "range": true,
             "refId": "B"
         }

@@ -26,18 +26,27 @@
     "templating": {
         "list": [
             {
+                "current": {
+                    "selected": false,
+                    "text": "All",
+                    "value": "$__all"
+                },
                 "datasource": {
                     "type": "prometheus",
                     "uid": "{{PROMETHEUS_UID}}"
                 },
-                "definition": "label_values(instance)",
+                "definition": "label_values({servicename=~\"iptunnel\"},instance)",
                 "hide": 0,
                 "includeAll": true,
                 "label": "实例",
                 "multi": false,
                 "name": "instance",
                 "options": [],
-                "query": "label_values(instance)",
+                "query": {
+                    "qryType": 1,
+                    "query": "label_values({servicename=~\"iptunnel\"},instance)",
+                    "refId": "PrometheusVariableQueryEditor-VariableQuery"
+                },
                 "refresh": 1,
                 "regex": "",
                 "skipUrlSync": false,
@@ -47,7 +56,7 @@
         ]
     },
     "time": {
-        "from": "now-6h",
+        "from": "now-5m",
         "to": "now"
     },
     "timepicker": {},

@@ -1,0 +1,1303 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 139,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 20,
+      "panels": [],
+      "title": "客户端指标",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "fe0mra1jcnklca"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "name",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fe0mra1jcnklca"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "pop_version{exported_instance=~\"$pop_machines\"}",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{instance_alias}} ~ {{version}}",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "POP客户端软件版本号",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "fe0mra1jcnklca"
+      },
+      "description": "基于发送字节数的瞬时速率",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 19,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fe0mra1jcnklca"
+          },
+          "editorMode": "code",
+          "expr": "pop_traffic_tx_rate{user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"} / 1000",
+          "instant": false,
+          "legendFormat": "{{instance_alias}} ~ {{alias}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "各用户机器发送流量速率（kbps）",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "fe0mra1jcnklca"
+      },
+      "description": "通过ping测量的延迟，监控POP peer的延迟",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 9
+      },
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fe0mra1jcnklca"
+          },
+          "editorMode": "code",
+          "expr": "pop_wireguard_latency{exported_instance=~\"$pop_machines\",peer_ip=~\"$pop_machines\"}",
+          "instant": false,
+          "legendFormat": "{{instance_alias}} ~ {{alias}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "各带宽线路对端网络延迟（毫秒）",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "fe0mra1jcnklca"
+      },
+      "description": "基于接收字节数的瞬时速率",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fe0mra1jcnklca"
+          },
+          "editorMode": "code",
+          "expr": "pop_traffic_rx_rate{user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"} / 1000",
+          "instant": false,
+          "legendFormat": "{{instance_alias}} ~ {{alias}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "各用户机器接收流量速率（kbps)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "fe0mra1jcnklca"
+      },
+      "description": "基于WireGuard握手状态",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 0.5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 13,
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "never",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fe0mra1jcnklca"
+          },
+          "editorMode": "code",
+          "expr": "pop_wireguard_peer_status{exported_instance=~\"$pop_machines\", peer_ip=~\"$user_machines\"}",
+          "instant": false,
+          "legendFormat": "{{instance_alias}} ~ {{alias}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "与各peer节点连接状态",
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "fe0mra1jcnklca"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 1
+                },
+                "1": {
+                  "color": "green",
+                  "index": 0
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 17
+      },
+      "id": 10,
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "never",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fe0mra1jcnklca"
+          },
+          "editorMode": "code",
+          "expr": "pop_alive_status{exported_instance=~\"$pop_machines\"}",
+          "instant": false,
+          "legendFormat": "{{instance_alias}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "POP客户端存活状态",
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "fe0mra1jcnklca"
+      },
+      "description": "DNS服务健康检查",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 17
+      },
+      "id": 15,
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "never",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fe0mra1jcnklca"
+          },
+          "editorMode": "code",
+          "expr": "pop_dns_service_status{exported_instance=~\"$pop_machines\"}",
+          "instant": false,
+          "legendFormat": "{{instance_alias}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "域名解析服务状态",
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "fe0mra1jcnklca"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 0
+                },
+                "1": {
+                  "color": "red",
+                  "index": 1
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 24
+      },
+      "id": 22,
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "never",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fe0mra1jcnklca"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "pop_rate_limit_hit{direction=\"upload\",user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"}",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{alias}} -> {{instance_alias}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "用户上传限速触发",
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "fe0mra1jcnklca"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 1
+                },
+                "1": {
+                  "color": "red",
+                  "index": 0
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 24
+      },
+      "id": 21,
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "never",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fe0mra1jcnklca"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "pop_rate_limit_hit{direction=\"download\",user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{alias}} <- {{instance_alias}}",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "用户下载限速触发",
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "fe0mra1jcnklca"
+      },
+      "description": "WireGuard peer发送的总字节数，user_machine_ip必须为用户内网IP",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 12,
+        "y": 24
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fe0mra1jcnklca"
+          },
+          "editorMode": "code",
+          "expr": "pop_wireguard_tx_bytes{user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"}",
+          "instant": false,
+          "legendFormat": "{{instance_alias}} ~ {{alias}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "每个用户机器的发送字节数",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "fe0mra1jcnklca"
+      },
+      "description": "WireGuard peer接收的总字节数，user_machine_ip必须为用户内网IP",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 12,
+        "y": 28
+      },
+      "id": 17,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fe0mra1jcnklca"
+          },
+          "editorMode": "code",
+          "expr": "pop_wireguard_rx_bytes{user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"}",
+          "instant": false,
+          "legendFormat": "{{instance_alias}} ~ {{alias}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "每个用户机器的接收字节数",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "default": false,
+        "type": "mysql",
+        "uid": "af74pp4t2ff28f"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "各线路带宽使用率"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "线路"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 318
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 32
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.2.2",
+      "targets": [
+        {
+          "dataset": "iptunnel",
+          "datasource": {
+            "type": "mysql",
+            "uid": "af74pp4t2ff28f"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS bandwidth_line_display, bl.bandwidth_line_code, bl.total_bandwidth FROM bandwidth_lines bl JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL AND bl.bandwidth_line_code LIKE $bandwidth_line",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "dataset": "iptunnel",
+          "datasource": {
+            "type": "mysql",
+            "uid": "af74pp4t2ff28f"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS bandwidth_line_display, c.bandwidth_line_code, c.user_code, SUM(c.bandwidth) AS total_bandwidth_used FROM configs c JOIN bandwidth_lines bl ON c.bandwidth_line_code = bl.bandwidth_line_code JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE c.status='active' AND c.deleted_at IS NULL AND bl.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL AND c.bandwidth_line_code LIKE $bandwidth_line GROUP BY bandwidth_line_display, c.bandwidth_line_code, c.user_code",
+          "refId": "B",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "各线路带宽总量（Mbps）",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "bandwidth_line_display",
+            "mode": "outerTabular"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "total_bandwidth_used",
+              "operator": "/",
+              "right": "total_bandwidth"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "total_bandwidth_used / total_bandwidth",
+              "operator": "*",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "bandwidth_line_code": true,
+              "total_bandwidth_used / total_bandwidth": true,
+              "user_code": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "bandwidth_line_display": "线路",
+              "total_bandwidth": "带宽总量（Mbps）",
+              "total_bandwidth_used": "带宽购买情况（Mbps）",
+              "total_bandwidth_used / total_bandwidth": "",
+              "total_bandwidth_used / total_bandwidth * 100": "各线路带宽使用率"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": "'%'",
+        "current": {
+          "selected": true,
+          "text": "JP-1 ~ VIG-1",
+          "value": "BANDWIDTH_LINE_1993152475485442048"
+        },
+        "datasource": {
+          "type": "mysql",
+          "uid": "af74pp4t2ff28f"
+        },
+        "definition": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS __text, bl.bandwidth_line_code AS __value FROM bandwidth_lines bl JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND ma.deleted_at IS NULL AND mb.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL ORDER BY ma.alias, mb.alias",
+        "hide": 0,
+        "includeAll": true,
+        "label": "带宽线路",
+        "multi": false,
+        "name": "bandwidth_line",
+        "options": [],
+        "query": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS __text, bl.bandwidth_line_code AS __value FROM bandwidth_lines bl JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND ma.deleted_at IS NULL AND mb.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL ORDER BY ma.alias, mb.alias",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "mysql",
+          "uid": "af74pp4t2ff28f"
+        },
+        "definition": "SELECT DISTINCT m.alias AS __text, m.intra_ip AS __value FROM bandwidth_lines bl JOIN machines m ON (bl.machine_a_code = m.machine_code OR bl.machine_b_code = m.machine_code) WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND m.deleted_at IS NULL AND m.type='pop' AND m.alias IS NOT NULL AND bl.bandwidth_line_code LIKE $bandwidth_line ORDER BY m.alias",
+        "hide": 0,
+        "includeAll": true,
+        "label": "POP机器列表",
+        "multi": true,
+        "name": "pop_machines",
+        "options": [],
+        "query": "SELECT DISTINCT m.alias AS __text, m.intra_ip AS __value FROM bandwidth_lines bl JOIN machines m ON (bl.machine_a_code = m.machine_code OR bl.machine_b_code = m.machine_code) WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND m.deleted_at IS NULL AND m.type='pop' AND m.alias IS NOT NULL AND bl.bandwidth_line_code LIKE $bandwidth_line ORDER BY m.alias",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "mysql",
+          "uid": "af74pp4t2ff28f"
+        },
+        "definition": "SELECT DISTINCT m.alias AS __text, m.intra_ip AS __value FROM configs c JOIN machines m ON c.user_machine_code = m.machine_code WHERE c.deleted_at IS NULL AND m.deleted_at IS NULL AND c.status='active' AND m.alias IS NOT NULL AND c.bandwidth_line_code LIKE $bandwidth_line ORDER BY m.alias",
+        "hide": 0,
+        "includeAll": true,
+        "label": "用户机器列表",
+        "multi": true,
+        "name": "user_machines",
+        "options": [],
+        "query": "SELECT DISTINCT m.alias AS __text, m.intra_ip AS __value FROM configs c JOIN machines m ON c.user_machine_code = m.machine_code WHERE c.deleted_at IS NULL AND m.deleted_at IS NULL AND c.status='active' AND m.alias IS NOT NULL AND c.bandwidth_line_code LIKE $bandwidth_line ORDER BY m.alias",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "IPTunnel 业务监控",
+  "uid": "iptunnel-business",
+  "version": 12,
+  "weekStart": ""
+}
