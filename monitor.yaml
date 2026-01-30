@@ -1,0 +1,10 @@
+server:
+  port: 6070
+  route: /metrics
+  interval: 5s
+  machineConfig:
+    metrics: [cpu, memory, disk, process, network]
+  apiServices:
+    - name: iptunnel
+      address: http://44.222.141.176:8001/metrics
+      timeout: 2s
