@@ -103,12 +103,14 @@ func setDefaults() {
 	Global.Server.MetricsURL = "http://localhost:8001/metrics"
 	Global.Server.Port = 8001
 
-	Global.Dashboards.ServerTemplate = "./dashboards/server-template.json"
+	Global.Dashboards.ServerTemplate = "./dashboards/iptunnel-server-monitoring.json"
 	Global.Dashboards.ClientTemplate = "./dashboards/client-template.json"
 	Global.Dashboards.DatabaseTemplate = "./dashboards/database-template.json"
+	Global.Dashboards.BusinessTemplate = "./dashboards/business-template.json"
 	Global.Dashboards.UnifiedUID = "pop-clients-unified"
-	Global.Dashboards.ServerUID = "tunnel-server"
+	Global.Dashboards.ServerUID = "iptunnel-server-monitoring"
 	Global.Dashboards.DatabaseUID = "tunnel-database"
+	Global.Dashboards.BusinessUID = "iptunnel-business"
 }
 
 func Save() error {

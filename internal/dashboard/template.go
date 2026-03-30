@@ -61,6 +61,11 @@ func LoadServerTemplate() (map[string]interface{}, error) {
 		templateFile = "./dashboards/iptunnel-server-monitoring.json"
 	}
 
+	// 优先使用完整模板文件
+	if _, err := os.Stat(templateFile); err == nil {
+		return LoadTemplate(templateFile)
+	}
+
 	// 尝试使用拆分模板
 	baseTemplate := "./dashboards/iptunnel-server-monitoring-base.json"
 	serverPanelsDir := "./dashboards/panels/server"
@@ -73,7 +78,7 @@ func LoadServerTemplate() (map[string]interface{}, error) {
 		}
 	}
 
-	// 否则使用完整模板
+	// 最后尝试完整模板（返回明确错误）
 	return LoadTemplate(templateFile)
 }
 
@@ -111,6 +116,11 @@ func LoadBusinessTemplate() (map[string]interface{}, error) {
 		templateFile = "./dashboards/business-template.json"
 	}
 
+	// 优先使用完整模板文件
+	if _, err := os.Stat(templateFile); err == nil {
+		return LoadTemplate(templateFile)
+	}
+
 	// 尝试使用拆分模板
 	baseTemplate := "./dashboards/business-base.json"
 	clientPanelsDir := "./dashboards/panels/client"
@@ -123,6 +133,6 @@ func LoadBusinessTemplate() (map[string]interface{}, error) {
 		}
 	}
 
-	// 否则使用完整模板
+	// 最后尝试完整模板（返回明确错误）
 	return LoadTemplate(templateFile)
 }

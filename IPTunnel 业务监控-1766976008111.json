@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 139,
+  "id": 0,
   "links": [],
   "panels": [
     {
@@ -29,16 +29,16 @@
         "x": 0,
         "y": 0
       },
-      "id": 20,
+      "id": 28,
       "panels": [],
-      "title": "客户端指标",
+      "title": "用户端指标",
       "type": "row"
     },
     {
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "fe0mra1jcnklca"
+        "uid": "ef32in03bdb0gb"
       },
       "fieldConfig": {
         "defaults": {
@@ -48,7 +48,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -84,20 +84,200 @@
         "textMode": "name",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.2",
+      "pluginVersion": "12.2.1",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "fe0mra1jcnklca"
+            "uid": "ef32in03bdb0gb"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "pop_version{exported_instance=~\"$pop_machines\"}",
+          "expr": "user_version{user_instance=~\"$user_machines\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
-          "legendFormat": "{{instance_alias}} ~ {{version}}",
+          "legendFormat": "{{user_alias}} ~ {{version}}",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "User端软件版本号",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ef32in03bdb0gb"
+      },
+      "description": "基于ping",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 23,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "user_target_latency{user_instance=~\"$user_machines\"}",
+          "legendFormat": "{{user_alias}} -> {{target_ip}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "用户机网络延迟",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 20,
+      "panels": [],
+      "title": "客户端指标",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "ef32in03bdb0gb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 10
+      },
+      "id": 25,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "ef32in03bdb0gb"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "pop_version{pop_instance=~\"$pop_machines\"}",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{pop_alias}} ~ {{version}}",
           "range": false,
           "refId": "A"
         }
@@ -109,7 +289,7 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "fe0mra1jcnklca"
+        "uid": "ef32in03bdb0gb"
       },
       "description": "基于发送字节数的瞬时速率",
       "fieldConfig": {
@@ -141,6 +321,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -156,14 +337,15 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "Kbits"
         },
         "overrides": []
       },
@@ -171,7 +353,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 1
+        "y": 10
       },
       "id": 19,
       "options": {
@@ -196,24 +378,24 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "fe0mra1jcnklca"
+            "uid": "ef32in03bdb0gb"
           },
           "editorMode": "code",
-          "expr": "pop_traffic_tx_rate{user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"} / 1000",
+          "expr": "pop_traffic_tx_rate{user_machine_ip=~\"$user_machines\", pop_instance=~\"$pop_machines\", direction=\"upload\"} / 1000",
           "instant": false,
-          "legendFormat": "{{instance_alias}} ~ {{alias}}",
+          "legendFormat": "{{user_alias}} -> {{pop_alias}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "各用户机器发送流量速率（kbps）",
+      "title": "各用户机器流量发送速率",
       "type": "timeseries"
     },
     {
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "fe0mra1jcnklca"
+        "uid": "ef32in03bdb0gb"
       },
       "description": "通过ping测量的延迟，监控POP peer的延迟",
       "fieldConfig": {
@@ -245,6 +427,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -260,7 +443,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -272,7 +455,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 9
+        "y": 18
       },
       "id": 14,
       "options": {
@@ -297,12 +480,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "fe0mra1jcnklca"
+            "uid": "ef32in03bdb0gb"
           },
           "editorMode": "code",
-          "expr": "pop_wireguard_latency{exported_instance=~\"$pop_machines\",peer_ip=~\"$pop_machines\"}",
+          "expr": "pop_wireguard_latency{pop_instance=~\"$pop_machines\"}",
           "instant": false,
-          "legendFormat": "{{instance_alias}} ~ {{alias}}",
+          "legendFormat": "{{pop_alias}} - {{user_alias}}",
           "range": true,
           "refId": "A"
         }
@@ -314,7 +497,7 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "fe0mra1jcnklca"
+        "uid": "ef32in03bdb0gb"
       },
       "description": "基于接收字节数的瞬时速率",
       "fieldConfig": {
@@ -346,6 +529,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -361,14 +545,15 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "Kbits"
         },
         "overrides": []
       },
@@ -376,7 +561,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 9
+        "y": 18
       },
       "id": 18,
       "options": {
@@ -401,24 +586,24 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "fe0mra1jcnklca"
+            "uid": "ef32in03bdb0gb"
           },
           "editorMode": "code",
-          "expr": "pop_traffic_rx_rate{user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"} / 1000",
+          "expr": "pop_traffic_tx_rate{user_machine_ip=~\"$user_machines\", pop_instance=~\"$pop_machines\", direction=\"download\"} / 1000",
           "instant": false,
-          "legendFormat": "{{instance_alias}} ~ {{alias}}",
+          "legendFormat": "{{user_alias}} <- {{pop_alias}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "各用户机器接收流量速率（kbps)",
+      "title": "各用户机器流量接收速率",
       "type": "timeseries"
     },
     {
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "fe0mra1jcnklca"
+        "uid": "ef32in03bdb0gb"
       },
       "description": "基于WireGuard握手状态",
       "fieldConfig": {
@@ -427,6 +612,7 @@
             "mode": "thresholds"
           },
           "custom": {
+            "axisPlacement": "auto",
             "fillOpacity": 70,
             "hideFrom": {
               "legend": false,
@@ -443,7 +629,7 @@
             "steps": [
               {
                 "color": "red",
-                "value": null
+                "value": 0
               },
               {
                 "color": "green",
@@ -458,7 +644,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 17
+        "y": 26
       },
       "id": 13,
       "options": {
@@ -482,12 +668,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "fe0mra1jcnklca"
+            "uid": "ef32in03bdb0gb"
           },
           "editorMode": "code",
-          "expr": "pop_wireguard_peer_status{exported_instance=~\"$pop_machines\", peer_ip=~\"$user_machines\"}",
+          "expr": "pop_wireguard_peer_status{pop_instance=~\"$pop_machines\"}",
           "instant": false,
-          "legendFormat": "{{instance_alias}} ~ {{alias}}",
+          "legendFormat": "{{pop_alias}} - {{user_alias}}",
           "range": true,
           "refId": "A"
         }
@@ -499,7 +685,7 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "fe0mra1jcnklca"
+        "uid": "ef32in03bdb0gb"
       },
       "fieldConfig": {
         "defaults": {
@@ -507,6 +693,7 @@
             "mode": "continuous-GrYlRd"
           },
           "custom": {
+            "axisPlacement": "auto",
             "fillOpacity": 70,
             "hideFrom": {
               "legend": false,
@@ -537,7 +724,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -552,7 +739,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 17
+        "y": 26
       },
       "id": 10,
       "options": {
@@ -576,12 +763,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "fe0mra1jcnklca"
+            "uid": "ef32in03bdb0gb"
           },
           "editorMode": "code",
-          "expr": "pop_alive_status{exported_instance=~\"$pop_machines\"}",
+          "expr": "pop_alive_status{pop_instance=~\"$pop_machines\"}",
           "instant": false,
-          "legendFormat": "{{instance_alias}}",
+          "legendFormat": "{{pop_alias}}",
           "range": true,
           "refId": "A"
         }
@@ -593,7 +780,7 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "fe0mra1jcnklca"
+        "uid": "ef32in03bdb0gb"
       },
       "description": "DNS服务健康检查",
       "fieldConfig": {
@@ -602,6 +789,7 @@
             "mode": "continuous-GrYlRd"
           },
           "custom": {
+            "axisPlacement": "auto",
             "fillOpacity": 70,
             "hideFrom": {
               "legend": false,
@@ -618,7 +806,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -633,7 +821,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 17
+        "y": 26
       },
       "id": 15,
       "options": {
@@ -657,12 +845,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "fe0mra1jcnklca"
+            "uid": "ef32in03bdb0gb"
           },
           "editorMode": "code",
-          "expr": "pop_dns_service_status{exported_instance=~\"$pop_machines\"}",
+          "expr": "pop_dns_service_status{pop_instance=~\"$pop_machines\"}",
           "instant": false,
-          "legendFormat": "{{instance_alias}}",
+          "legendFormat": "{{pop_alias}}",
           "range": true,
           "refId": "A"
         }
@@ -672,48 +860,46 @@
     },
     {
       "datasource": {
-        "default": true,
-        "type": "prometheus",
-        "uid": "fe0mra1jcnklca"
+        "type": "datasource",
+        "uid": "-- Mixed --"
       },
       "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "thresholds"
           },
           "custom": {
-            "fillOpacity": 70,
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
             },
-            "insertNulls": false,
-            "lineWidth": 0,
-            "spanNulls": false
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
           },
           "mappings": [
             {
               "options": {
                 "0": {
                   "color": "green",
-                  "index": 0
+                  "index": 1
                 },
                 "1": {
                   "color": "red",
-                  "index": 1
+                  "index": 0
                 }
               },
               "type": "value"
             }
           ],
           "thresholds": {
-            "mode": "absolute",
+            "mode": "percentage",
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -722,289 +908,150 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "使用带宽占比"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
-        "w": 6,
+        "w": 12,
         "x": 0,
-        "y": 24
+        "y": 33
       },
-      "id": 22,
+      "id": 26,
       "options": {
-        "alignValue": "left",
-        "legend": {
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "mergeValues": true,
-        "rowHeight": 0.9,
-        "showValue": "never",
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
+        "cellHeight": "sm",
+        "showHeader": true
       },
       "pluginVersion": "12.2.1",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "fe0mra1jcnklca"
+            "uid": "ef32in03bdb0gb"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "pop_rate_limit_hit{direction=\"upload\",user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"}",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "{{alias}} -> {{instance_alias}}",
-          "range": true,
+          "expr": "pop_traffic_tx_rate{user_machine_ip=~\"$user_machines\", pop_instance=~\"$pop_machines\", direction=\"upload\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "{{user_machine_ip}}",
+          "range": false,
           "refId": "A"
+        },
+        {
+          "dataset": "tunnel",
+          "datasource": {
+            "type": "mysql",
+            "uid": "dfc82k35vzjeod"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\n  um.ip AS user_machine_ip,\n  c.bandwidth * 1000000 AS purchased_bandwidth\nFROM configs c\nJOIN machines um\n  ON c.user_machine_code = um.machine_code\n AND um.deleted_at IS NULL\nJOIN bandwidth_lines bl\n  ON c.bandwidth_line_code = bl.bandwidth_line_code\n AND bl.deleted_at IS NULL\n AND bl.is_active = 1\nWHERE c.deleted_at IS NULL\n  AND um.ip IS NOT NULL\n  AND um.ip REGEXP '${user_machines:pipe}'\n  AND c.bandwidth_line_code REGEXP '${bandwidth_line:pipe}'\nORDER BY um.ip;",
+          "refId": "B",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
-      "title": "用户上传限速触发",
-      "type": "state-timeline"
-    },
-    {
-      "datasource": {
-        "default": true,
-        "type": "prometheus",
-        "uid": "fe0mra1jcnklca"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "custom": {
-            "fillOpacity": 70,
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineWidth": 0,
-            "spanNulls": false
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "color": "green",
-                  "index": 1
-                },
-                "1": {
-                  "color": "red",
-                  "index": 0
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+      "title": "用户上传占用百分比",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "user_machine_ip",
+            "mode": "inner"
           }
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 6,
-        "x": 6,
-        "y": 24
-      },
-      "id": 21,
-      "options": {
-        "alignValue": "left",
-        "legend": {
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "mergeValues": true,
-        "rowHeight": 0.9,
-        "showValue": "never",
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.2.1",
-      "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "fe0mra1jcnklca"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "pop_rate_limit_hit{direction=\"download\",user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"}",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "{{alias}} <- {{instance_alias}}",
-          "range": true,
-          "refId": "B"
-        }
-      ],
-      "title": "用户下载限速触发",
-      "type": "state-timeline"
-    },
-    {
-      "datasource": {
-        "default": true,
-        "type": "prometheus",
-        "uid": "fe0mra1jcnklca"
-      },
-      "description": "WireGuard peer发送的总字节数，user_machine_ip必须为用户内网IP",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+          "id": "calculateField",
+          "options": {
+            "alias": "使用带宽占比",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value"
+                }
+              },
+              "operator": "/",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "purchased_bandwidth"
+                }
               }
-            ]
-          },
-          "unit": "decbytes"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 12,
-        "x": 12,
-        "y": 24
-      },
-      "id": 16,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.2.2",
-      "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "fe0mra1jcnklca"
-          },
-          "editorMode": "code",
-          "expr": "pop_wireguard_tx_bytes{user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"}",
-          "instant": false,
-          "legendFormat": "{{instance_alias}} ~ {{alias}}",
-          "range": true,
-          "refId": "A"
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "direction": true,
+              "instance": true,
+              "job": true,
+              "pop_alias": false,
+              "pop_instance": true,
+              "purchased_bandwidth": true,
+              "user_alias": false,
+              "user_code": true,
+              "user_machine_ip": true,
+              "使用带宽占比": false,
+              "使用带宽百分比%": true,
+              "带宽占比": false
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "orderByMode": "manual",
+            "renameByName": {
+              "带宽占比": ""
+            }
+          }
         }
       ],
-      "title": "每个用户机器的发送字节数",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "default": true,
-        "type": "prometheus",
-        "uid": "fe0mra1jcnklca"
-      },
-      "description": "WireGuard peer接收的总字节数，user_machine_ip必须为用户内网IP",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 12,
-        "x": 12,
-        "y": 28
-      },
-      "id": 17,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.2.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "fe0mra1jcnklca"
-          },
-          "editorMode": "code",
-          "expr": "pop_wireguard_rx_bytes{user_machine_ip=~\"$user_machines\", exported_instance=~\"$pop_machines\"}",
-          "instant": false,
-          "legendFormat": "{{instance_alias}} ~ {{alias}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "每个用户机器的接收字节数",
-      "type": "stat"
+      "type": "table"
     },
     {
       "datasource": {
         "default": false,
         "type": "mysql",
-        "uid": "af74pp4t2ff28f"
+        "uid": "dfc82k35vzjeod"
       },
       "fieldConfig": {
         "defaults": {
@@ -1016,6 +1063,9 @@
             "cellOptions": {
               "type": "auto"
             },
+            "footer": {
+              "reducers": []
+            },
             "inspect": false
           },
           "mappings": [],
@@ -1024,7 +1074,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1045,53 +1095,33 @@
                 "value": "percent"
               }
             ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "线路"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 318
-              }
-            ]
           }
         ]
       },
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 0,
-        "y": 32
+        "x": 12,
+        "y": 33
       },
       "id": 1,
       "options": {
         "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "11.2.2",
+      "pluginVersion": "12.2.1",
       "targets": [
         {
           "dataset": "iptunnel",
           "datasource": {
             "type": "mysql",
-            "uid": "af74pp4t2ff28f"
+            "uid": "dfc82k35vzjeod"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS bandwidth_line_display, bl.bandwidth_line_code, bl.total_bandwidth FROM bandwidth_lines bl JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL AND bl.bandwidth_line_code LIKE $bandwidth_line",
+          "rawSql": "SELECT \n    CONCAT(ma.alias, ' ~ ', mb.alias) AS bandwidth_line_display, \n    bl.bandwidth_line_code, \n    bl.total_bandwidth,\n    bl.real_total_bandwidth\nFROM bandwidth_lines bl \nJOIN machines ma ON bl.machine_a_code = ma.machine_code \nJOIN machines mb ON bl.machine_b_code = mb.machine_code \nWHERE bl.is_active=1 \n  AND bl.deleted_at IS NULL \n  AND ma.alias IS NOT NULL \n  AND mb.alias IS NOT NULL \n  -- 修改此处：使用 REGEXP 配合 pipe 格式化\n  AND bl.bandwidth_line_code REGEXP '${bandwidth_line:pipe}'",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1115,13 +1145,13 @@
           "dataset": "iptunnel",
           "datasource": {
             "type": "mysql",
-            "uid": "af74pp4t2ff28f"
+            "uid": "dfc82k35vzjeod"
           },
           "editorMode": "code",
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS bandwidth_line_display, c.bandwidth_line_code, c.user_code, SUM(c.bandwidth) AS total_bandwidth_used FROM configs c JOIN bandwidth_lines bl ON c.bandwidth_line_code = bl.bandwidth_line_code JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE c.status='active' AND c.deleted_at IS NULL AND bl.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL AND c.bandwidth_line_code LIKE $bandwidth_line GROUP BY bandwidth_line_display, c.bandwidth_line_code, c.user_code",
+          "rawSql": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS bandwidth_line_display, c.bandwidth_line_code, c.user_code, SUM(c.bandwidth) AS total_bandwidth_used FROM configs c JOIN bandwidth_lines bl ON c.bandwidth_line_code = bl.bandwidth_line_code JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE c.status='active' AND c.deleted_at IS NULL AND bl.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL AND c.bandwidth_line_code REGEXP '${bandwidth_line:pipe}' GROUP BY bandwidth_line_display, c.bandwidth_line_code, c.user_code",
           "refId": "B",
           "sql": {
             "columns": [
@@ -1155,9 +1185,19 @@
           "id": "calculateField",
           "options": {
             "binary": {
-              "left": "total_bandwidth_used",
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "total_bandwidth_used"
+                }
+              },
               "operator": "/",
-              "right": "total_bandwidth"
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "total_bandwidth"
+                }
+              }
             },
             "mode": "binary",
             "reduce": {
@@ -1169,9 +1209,16 @@
           "id": "calculateField",
           "options": {
             "binary": {
-              "left": "total_bandwidth_used / total_bandwidth",
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "total_bandwidth_used / total_bandwidth"
+                }
+              },
               "operator": "*",
-              "right": "100"
+              "right": {
+                "fixed": "100"
+              }
             },
             "mode": "binary",
             "reduce": {
@@ -1191,6 +1238,7 @@
             "indexByName": {},
             "renameByName": {
               "bandwidth_line_display": "线路",
+              "real_total_bandwidth": "真实物理带宽（Mbps）",
               "total_bandwidth": "带宽总量（Mbps）",
               "total_bandwidth_used": "带宽购买情况（Mbps）",
               "total_bandwidth_used / total_bandwidth": "",
@@ -1200,104 +1248,416 @@
         }
       ],
       "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "footer": {
+              "reducers": []
+            },
+            "hideFrom": {
+              "viz": false
+            },
+            "inspect": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 1
+                },
+                "1": {
+                  "color": "red",
+                  "index": 0
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "使用带宽占比"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 41
+      },
+      "id": 27,
+      "options": {
+        "cellHeight": "sm",
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Time"
+          }
+        ]
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "ef32in03bdb0gb"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "pop_traffic_tx_rate{user_machine_ip=~\"$user_machines\", pop_instance=~\"$pop_machines\", direction=\"download\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "{{user_machine_ip}}",
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "dataset": "tunnel",
+          "datasource": {
+            "type": "mysql",
+            "uid": "dfc82k35vzjeod"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\n  um.ip AS user_machine_ip,\n  c.bandwidth * 1000000 AS purchased_bandwidth\nFROM configs c\nJOIN machines um\n  ON c.user_machine_code = um.machine_code\n AND um.deleted_at IS NULL\nJOIN bandwidth_lines bl\n  ON c.bandwidth_line_code = bl.bandwidth_line_code\n AND bl.deleted_at IS NULL\n AND bl.is_active = 1\nWHERE c.deleted_at IS NULL\n  AND um.ip IS NOT NULL\n  AND um.ip REGEXP '${user_machines:pipe}'\n  AND c.bandwidth_line_code REGEXP '${bandwidth_line:pipe}'\nORDER BY um.ip;",
+          "refId": "B",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "用户下载占用百分比",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "user_machine_ip",
+            "mode": "inner"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "使用带宽占比",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value"
+                }
+              },
+              "operator": "/",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "purchased_bandwidth"
+                }
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "direction": true,
+              "instance": true,
+              "job": true,
+              "pop_alias": false,
+              "pop_instance": true,
+              "purchased_bandwidth": true,
+              "user_alias": false,
+              "user_code": true,
+              "user_machine_ip": true,
+              "使用带宽占比": false,
+              "带宽占比": false
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "orderByMode": "manual",
+            "renameByName": {
+              "带宽占比": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "Kbits"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 41
+      },
+      "id": 24,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "ef32in03bdb0gb"
+          },
+          "editorMode": "code",
+          "expr": "traffic_line_rate{line_code=~\"$bandwidth_line\",pop_instance=~\"$pop_machines\",} / 1000",
+          "instant": false,
+          "legendFormat": "{{pop_alias}} -> {{peer_alias}}",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "dataset": "tunnel",
+          "datasource": {
+            "type": "mysql",
+            "uid": "dfc82k35vzjeod"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": true,
+          "rawQuery": true,
+          "rawSql": "SELECT \n    bl.bandwidth_line_code AS line_code,\n    bl.real_total_bandwidth\nFROM bandwidth_lines bl \nJOIN machines ma ON bl.machine_a_code = ma.machine_code \nJOIN machines mb ON bl.machine_b_code = mb.machine_code \nWHERE bl.is_active=1 \n  AND bl.deleted_at IS NULL \n  AND ma.alias IS NOT NULL \n  AND mb.alias IS NOT NULL \n  -- 修改此处：使用 REGEXP 配合 pipe 格式化\n  AND bl.bandwidth_line_code REGEXP '${bandwidth_line:pipe}'",
+          "refId": "B",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "各线路实际使用速率",
+      "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "10s",
-  "schemaVersion": 39,
+  "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": "'%'",
         "current": {
-          "selected": true,
-          "text": "JP-1 ~ VIG-1",
-          "value": "BANDWIDTH_LINE_1993152475485442048"
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "mysql",
-          "uid": "af74pp4t2ff28f"
+          "uid": "dfc82k35vzjeod"
         },
-        "definition": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS __text, bl.bandwidth_line_code AS __value FROM bandwidth_lines bl JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND ma.deleted_at IS NULL AND mb.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL ORDER BY ma.alias, mb.alias",
-        "hide": 0,
+        "definition": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS __text, bl.bandwidth_line_code AS __value \nFROM bandwidth_lines bl JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code \nWHERE bl.is_active=1 AND bl.deleted_at IS NULL AND ma.deleted_at IS NULL AND mb.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL ORDER BY ma.alias, mb.alias",
         "includeAll": true,
         "label": "带宽线路",
-        "multi": false,
+        "multi": true,
         "name": "bandwidth_line",
         "options": [],
-        "query": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS __text, bl.bandwidth_line_code AS __value FROM bandwidth_lines bl JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND ma.deleted_at IS NULL AND mb.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL ORDER BY ma.alias, mb.alias",
+        "query": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS __text, bl.bandwidth_line_code AS __value \nFROM bandwidth_lines bl JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code \nWHERE bl.is_active=1 AND bl.deleted_at IS NULL AND ma.deleted_at IS NULL AND mb.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL ORDER BY ma.alias, mb.alias",
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
         "current": {
-          "selected": true,
           "text": [
-            "All"
+            "pop1"
           ],
           "value": [
-            "$__all"
+            "10.1.0.2"
           ]
         },
         "datasource": {
           "type": "mysql",
-          "uid": "af74pp4t2ff28f"
+          "uid": "dfc82k35vzjeod"
         },
-        "definition": "SELECT DISTINCT m.alias AS __text, m.intra_ip AS __value FROM bandwidth_lines bl JOIN machines m ON (bl.machine_a_code = m.machine_code OR bl.machine_b_code = m.machine_code) WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND m.deleted_at IS NULL AND m.type='pop' AND m.alias IS NOT NULL AND bl.bandwidth_line_code LIKE $bandwidth_line ORDER BY m.alias",
-        "hide": 0,
+        "definition": "SELECT DISTINCT \n    m.alias AS __text, \n    m.intra_ip AS __value \nFROM bandwidth_lines bl \nJOIN machines m ON (bl.machine_a_code = m.machine_code OR bl.machine_b_code = m.machine_code) \nWHERE bl.is_active=1 \n  AND bl.deleted_at IS NULL \n  AND m.deleted_at IS NULL \n  AND m.type='pop' \n  AND m.alias IS NOT NULL \n  -- 修改这里：使用 pipe 格式并配合 MySQL 的正则匹配\n  AND bl.bandwidth_line_code REGEXP '${bandwidth_line:pipe}'\nORDER BY m.alias",
         "includeAll": true,
         "label": "POP机器列表",
         "multi": true,
         "name": "pop_machines",
         "options": [],
-        "query": "SELECT DISTINCT m.alias AS __text, m.intra_ip AS __value FROM bandwidth_lines bl JOIN machines m ON (bl.machine_a_code = m.machine_code OR bl.machine_b_code = m.machine_code) WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND m.deleted_at IS NULL AND m.type='pop' AND m.alias IS NOT NULL AND bl.bandwidth_line_code LIKE $bandwidth_line ORDER BY m.alias",
+        "query": "SELECT DISTINCT \n    m.alias AS __text, \n    m.intra_ip AS __value \nFROM bandwidth_lines bl \nJOIN machines m ON (bl.machine_a_code = m.machine_code OR bl.machine_b_code = m.machine_code) \nWHERE bl.is_active=1 \n  AND bl.deleted_at IS NULL \n  AND m.deleted_at IS NULL \n  AND m.type='pop' \n  AND m.alias IS NOT NULL \n  -- 修改这里：使用 pipe 格式并配合 MySQL 的正则匹配\n  AND bl.bandwidth_line_code REGEXP '${bandwidth_line:pipe}'\nORDER BY m.alias",
         "refresh": 2,
         "regex": "",
-        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       },
       {
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "mysql",
-          "uid": "af74pp4t2ff28f"
+          "uid": "dfc82k35vzjeod"
         },
-        "definition": "SELECT DISTINCT m.alias AS __text, m.intra_ip AS __value FROM configs c JOIN machines m ON c.user_machine_code = m.machine_code WHERE c.deleted_at IS NULL AND m.deleted_at IS NULL AND c.status='active' AND m.alias IS NOT NULL AND c.bandwidth_line_code LIKE $bandwidth_line ORDER BY m.alias",
-        "hide": 0,
+        "definition": "SELECT DISTINCT \n    COALESCE(m.alias, m.machine_code) AS __text, \n    m.ip AS __value \nFROM configs c \nJOIN machines m ON c.user_machine_code = m.machine_code \nWHERE c.deleted_at IS NULL \n  AND m.deleted_at IS NULL \n  AND c.status='active' \n  AND c.bandwidth_line_code REGEXP '${bandwidth_line:pipe}'\nORDER BY __text",
         "includeAll": true,
         "label": "用户机器列表",
         "multi": true,
         "name": "user_machines",
         "options": [],
-        "query": "SELECT DISTINCT m.alias AS __text, m.intra_ip AS __value FROM configs c JOIN machines m ON c.user_machine_code = m.machine_code WHERE c.deleted_at IS NULL AND m.deleted_at IS NULL AND c.status='active' AND m.alias IS NOT NULL AND c.bandwidth_line_code LIKE $bandwidth_line ORDER BY m.alias",
+        "query": "SELECT DISTINCT \n    COALESCE(m.alias, m.machine_code) AS __text, \n    m.ip AS __value \nFROM configs c \nJOIN machines m ON c.user_machine_code = m.machine_code \nWHERE c.deleted_at IS NULL \n  AND m.deleted_at IS NULL \n  AND c.status='active' \n  AND c.bandwidth_line_code REGEXP '${bandwidth_line:pipe}'\nORDER BY __text",
         "refresh": 2,
         "regex": "",
-        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "IPTunnel 业务监控",
   "uid": "iptunnel-business",
-  "version": 12,
-  "weekStart": ""
+  "version": 106
 }

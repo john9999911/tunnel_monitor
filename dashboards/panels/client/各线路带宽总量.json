@@ -89,7 +89,7 @@
             "editorMode": "code",
             "format": "table",
             "rawQuery": true,
-            "rawSql": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS bandwidth_line_display, bl.bandwidth_line_code, bl.total_bandwidth FROM bandwidth_lines bl JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL AND bl.bandwidth_line_code LIKE $bandwidth_line",
+            "rawSql": "SELECT CONCAT(ma.alias, ' ~ ', mb.alias) AS bandwidth_line_display, bl.bandwidth_line_code, COALESCE(bl.real_total_bandwidth, bl.total_bandwidth) AS total_bandwidth FROM bandwidth_lines bl JOIN machines ma ON bl.machine_a_code = ma.machine_code JOIN machines mb ON bl.machine_b_code = mb.machine_code WHERE bl.is_active=1 AND bl.deleted_at IS NULL AND ma.alias IS NOT NULL AND mb.alias IS NOT NULL AND bl.bandwidth_line_code LIKE $bandwidth_line",
             "refId": "A",
             "sql": {
                 "columns": [
